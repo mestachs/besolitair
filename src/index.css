@@ -35,7 +35,7 @@ h1 { color: red; font-size: 96px; }
 /* Card */
 #table { height: 100%; position: relative; width: 100%; }
 
-.card { background-color: #fff; -moz-border-radius: 10px; -webkit-border-radius: 10px; -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); float: left; height: 280px; margin: 15px 15px 15px 15px; position: relative; width: 200px; z-index: 2; }
+.card {  user-select: none; background-color: #fff; -moz-border-radius: 10px; -webkit-border-radius: 10px; -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); float: left; height: 280px; position: relative; width: 200px; z-index: 2; }
 .card .back { background-color: red; -webkit-transform: rotateY(180deg); }
 .card.flipped { -webkit-transform: rotateY(180deg); }
 .card.heart, .card.diamond { color: red; }
@@ -44,7 +44,7 @@ h1 { color: red; font-size: 96px; }
 .card .corner span { display: block; font-size: 24px; font-weight: bold; }
 .card .corner .number { font-size: 32px; height: 32px; line-height: 32px; }
 .card.ten .corner .number { font-size: 24px; letter-spacing: -1.8px; }
-.card .corner.top { left: 8px; top: 12px; }
+.card .corner.top { left: 8px; top: 8px; }
 .card .corner.bottom { bottom: 12px; right: 8px; -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg); }
 
 .card .suit { font-size: 54px; font-weight: bold; height: 60px; line-height: 60px; overflow: hidden; position: absolute; text-align: center; width: 50px; }

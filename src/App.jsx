@@ -10,64 +10,15 @@ function App() {
 
   return (
     <div id="table">
-      <div id="cards">
-        <div class="card jack">
-          <div>
-            <div class="corner top">
-              <span class="number">J</span>
-              <span>&#9827;</span>
-            </div>
-
-            <span class="suit middle_center">&#9827;</span>
-
-            <div class="corner bottom">
-              <span class="number">J</span>
-              <span>&#9827;</span>
-            </div>
-          </div>
-
-          <div class="card queen">
-            <div class="corner top">
-              <span class="number">Q</span>
-              <span>&#9827;</span>
-            </div>
-
-            <span class="suit middle_center">&#9827;</span>
-
-            <div class="corner bottom">
-              <span class="number">Q</span>
-              <span>&#9827;</span>
-            </div>
-          </div>
-
-          <div class="card king">
-            <div class="corner top">
-              <span class="number">K</span>
-              <span>&#9827;</span>
-            </div>
-
-            <span class="suit middle_center">&#9827;</span>
-
-            <div class="corner bottom">
-              <span class="number">K</span>
-              <span>&#9827;</span>
-            </div>
-          </div>
-
-          <div class="card ace">
-            <div class="corner top">
-              <span class="number">A</span>
-              <span>&#9827;</span>
-            </div>
-
-            <span class="suit middle_center">&#9827;</span>
-
-            <div class="corner bottom">
-              <span class="number">A</span>
-              <span>&#9827;</span>
-            </div>
-          </div>
-        </div>
+      <div
+        id="cards"
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+        }}
+      >
         {suites.map((suite) => {
           return ranks.map((rank) => {
             return (
