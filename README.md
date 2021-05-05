@@ -11,3 +11,9 @@ developement setup
 yarn 
 yarn dev
 ```
+
+deployment to gh-pages
+
+```
+./deploy.sh
+```
