@@ -2,13 +2,12 @@ import React, { useState } from "react";
 
 const Deck = ({ deck, children }) => {
   return (
-    <div >
+    <div style={{ display: "inline-block" }}>
       {children.map((c, index) => (
         <div
           style={{
-            position: "absolute",
-            top: index * 60,
-            left: deck * 300
+            position: "relative",
+            top: -index * 210,
           }}
         >
           {c}

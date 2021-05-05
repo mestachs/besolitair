@@ -12,21 +12,20 @@ function App() {
   ranks.sort((a, b) => 0.5 - Math.random());
   return (
     <div id="table">
-      <div id="cards" style={{display: "block"}}>
+      <div id="cards" style={{display: "flex", justifyContent: "space-around"}}>
         {suites.map((suite, index) => {
           return (
-            <Deck deck={index}>
-              {ranks.map((rank) => {
-                return (
-                  <>
-                    <Card suit={suite} rank={rank}></Card>
-                  </>
-                );
-              })}
-            </Deck>
+              <Deck deck={index}>
+                {ranks.map((rank) => {
+                  return (
+                    <>
+                      <Card suit={suite} rank={rank}></Card>
+                    </>
+                  );
+                })}
+              </Deck>
           );
         })}
-        <br></br>
       </div>
     </div>
   );
