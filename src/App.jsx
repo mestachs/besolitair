@@ -85,11 +85,60 @@ const toGame = (cards) => {
   };
 };
 
+const cloneGame = (game) => JSON.parse(JSON.stringify(game));
+
+const lastCard = (deck) => deck.cards[deck.cards.length - 1];
+
+const possibleMoves = (card, game) => {
+  const moves = [];
+  if (card.visible) {
+    for (let deck of game.decks) {
+      const cardIndex = deck.cards.findIndex((c) => c.id === card.id);
+      if (cardIndex >= 0) {
+        const playableDecks = game.decks.filter((deck) => {
+          const candidateCard = lastCard(deck);
+          if (candidateCard == undefined) {
+            return true;
+          }
+          if (candidateCard.rank - 1 == card.rank) {
+            return true;
+          }
+        });
+
+        playableDecks.forEach((targetDeck) =>
+          moves.push({
+            card: card,
+            sourceDeck: deck,
+            sourceCardIndex: cardIndex,
+            targetDeck: targetDeck,
+          })
+        );
+      }
+    }
+  }
+  return moves;
+};
+
+const moveCard = (game, move) => {
+  debugger;
+  const newgame = cloneGame(game);
+  const sourceDeck = newgame.decks[move.sourceDeck.id];
+  const movedCards = sourceDeck.cards.slice(move.sourceCardIndex);
+  sourceDeck.cards = sourceDeck.cards.slice(0, move.sourceCardIndex);
+  const last = lastCard(sourceDeck);
+  if (last) {
+    last.visible = true;
+  }
+  movedCards.forEach((c) => newgame.decks[move.targetDeck.id].cards.push(c));
+  debugger;
+  return newgame;
+};
+
 function App() {
-  const [game, setGame] = useState(toGame(shuffle(generateSpideCards(2))));
+  const [game, setGame] = useState(toGame(shuffle(generateSpideCards(1))));
 
   const distributeRemainingCards = () => {
-    const newGame = JSON.parse(JSON.stringify(game));
+    const newGame = cloneGame(game);
 
     const cards = newGame.remaingCards;
     for (let deckIndex = 0; deckIndex < 10; deckIndex++) {
@@ -99,6 +148,14 @@ function App() {
       }
     }
     setGame(newGame);
+  };
+
+  const onClickCard = (card) => {
+    const moves = possibleMoves(card, game);
+    if (moves.length > 0) {
+      const newGame = moveCard(game, moves[0]);
+      setGame(newGame);
+    }
   };
   return (
     <div id="table">
@@ -113,13 +170,21 @@ function App() {
         {game.decks.map((deck, index) => {
           return (
             <Deck key={deck.id} deck={index}>
-              {deck.cards.map((card) => {
-                return (
-                  <>
-                    <Card key={card.id} {...card}></Card>
-                  </>
-                );
-              })}
+              {deck.cards
+                .map((card) => {
+                  return (
+                    <>
+                      <Card
+                        key={card.id}
+                        {...card}
+                        onClick={onClickCard}
+                      ></Card>
+                    </>
+                  );
+                })
+                .concat(
+                  deck.cards.length == 0 ? [<Card disabled={true} />] : []
+                )}
             </Deck>
           );
         })}

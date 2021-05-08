@@ -5,6 +5,7 @@ const Deck = ({ deck, children }) => {
     <div style={{ display: "inline-block" }}>
       {children.map((c, index) => (
         <div
+          key={index}
           style={{
             position: "relative",
             top: -index * 220,
