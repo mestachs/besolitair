@@ -30,22 +30,20 @@ const ranks = { 11: "J", 12: "Q", 13: "K", 1: "A" };
 
 const scale = "scale(0.7, 0.7)";
 
-const Card = ({ id, suit, rank, visible }) => {
+const Card = ({ id, suit, rank, visible, onClick }) => {
   debugger;
   const suite = suites[suit];
   const rankLabel = ranks[rank] || rank;
 
-  if (suite == undefined) {
-    throw new Error("Unknown suite " + suit);
-  }
   const handleClick = () => {
-    alert("clicked " + rankLabel + " of " + suit + " (" + suite.name + ")");
+    onClick({ id, suit, rank, visible });
   };
 
   if (!visible) {
     return (
       <div
         class="card"
+        onClick={handleClick}
         style={{
           background: "linear-gradient(135deg, #65799b 0%,#5e2563 100%)",
           transform: scale,
@@ -53,6 +51,11 @@ const Card = ({ id, suit, rank, visible }) => {
       ></div>
     );
   }
+
+  if (suite == undefined) {
+    throw new Error("Unknown suite " + suit);
+  }
+
   return (
     <div onClick={handleClick}>
       <div class="card" style={{ color: suite.color, transform: scale }}>

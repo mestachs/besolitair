@@ -7,7 +7,7 @@ const Deck = ({ deck, children }) => {
         <div
           style={{
             position: "relative",
-            top: -index * 210,
+            top: -index * 220,
           }}
         >
           {c}

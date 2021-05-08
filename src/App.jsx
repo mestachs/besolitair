@@ -86,12 +86,25 @@ const toGame = (cards) => {
 };
 
 function App() {
-  const [count, setCount] = useState(0);
-  const cards = shuffle(generateSpideCards(2));
-  debugger;
-  const game = toGame(cards);
+  const [game, setGame] = useState(toGame(shuffle(generateSpideCards(2))));
+
+  const distributeRemainingCards = () => {
+    const newGame = JSON.parse(JSON.stringify(game));
+
+    const cards = newGame.remaingCards;
+    for (let deckIndex = 0; deckIndex < 10; deckIndex++) {
+      const card = cards.shift();
+      if (card) {
+        newGame.decks[deckIndex].cards.push({ ...card, visible: true });
+      }
+    }
+    setGame(newGame);
+  };
   return (
     <div id="table">
+      {game.remaingCards.length > 0 && (
+        <Card visible={false} onClick={distributeRemainingCards}></Card>
+      )}
       <div
         id="cards"
         style={{ display: "flex", justifyContent: "space-around" }}
