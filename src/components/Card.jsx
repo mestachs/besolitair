@@ -28,15 +28,34 @@ const ranks = { 11: "J", 12: "Q", 13: "K", 1: "A" };
 
 // heavily inspired by  https://github.com/zachwaugh/Helveticards
 
-const Card = ({ suit, rank }) => {
+const scale = "scale(0.7, 0.7)";
+
+const Card = ({ id, suit, rank, visible }) => {
+  debugger;
   const suite = suites[suit];
   const rankLabel = ranks[rank] || rank;
+
+  if (suite == undefined) {
+    throw new Error("Unknown suite " + suit);
+  }
   const handleClick = () => {
     alert("clicked " + rankLabel + " of " + suit + " (" + suite.name + ")");
   };
+
+  if (!visible) {
+    return (
+      <div
+        class="card"
+        style={{
+          background: "linear-gradient(135deg, #65799b 0%,#5e2563 100%)",
+          transform: scale,
+        }}
+      ></div>
+    );
+  }
   return (
     <div onClick={handleClick}>
-      <div class="card" style={{ color: suite.color }}>
+      <div class="card" style={{ color: suite.color, transform: scale }}>
         <div class="front">
           <div class="corner top">
             <span class="number">{rankLabel}</span>
