@@ -59,7 +59,7 @@ const toGame = (cards) => {
     for (let tourIndex = 0; tourIndex < 5; tourIndex++) {
       const card = cards.shift();
       if (decks[deckIndex] == undefined) {
-        decks[deckIndex] = { cards: [] };
+        decks[deckIndex] = { id: deckIndex, cards: [] };
       }
       if (card) {
         decks[deckIndex].cards.push({ ...card, visible: false });
@@ -105,6 +105,7 @@ function App() {
       {game.remaingCards.length > 0 && (
         <Card visible={false} onClick={distributeRemainingCards}></Card>
       )}
+      {game.remaingCards.length == 0 && <Card disabled={true}></Card>}
       <div
         id="cards"
         style={{ display: "flex", justifyContent: "space-around" }}

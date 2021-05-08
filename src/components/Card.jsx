@@ -30,7 +30,7 @@ const ranks = { 11: "J", 12: "Q", 13: "K", 1: "A" };
 
 const scale = "scale(0.7, 0.7)";
 
-const Card = ({ id, suit, rank, visible, onClick }) => {
+const Card = ({ id, suit, rank, visible, disabled, onClick }) => {
   debugger;
   const suite = suites[suit];
   const rankLabel = ranks[rank] || rank;
@@ -38,6 +38,28 @@ const Card = ({ id, suit, rank, visible, onClick }) => {
   const handleClick = () => {
     onClick({ id, suit, rank, visible });
   };
+
+  if (disabled) {
+    return (
+      <div
+        class="card"
+        style={{
+          transform: scale,
+        }}
+      >
+        <div class="corner top">
+          <span className="suite" style={{ fontSize: "500%", filter: "grayscale(100%)"}}>
+            {"\u26d4"}
+          </span>
+        </div>
+        <div class="corner bottom">
+          <span className="suite" style={{ fontSize: "500%", filter: "grayscale(100%)"}}>
+            {"\u26d4"}
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   if (!visible) {
     return (
