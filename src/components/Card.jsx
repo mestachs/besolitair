@@ -8,7 +8,7 @@ const suites = {
     color: "red",
   },
   spades: {
-    symbol: "\u2664",
+    symbol: "\u2660",
     name: "pique",
     color: "black",
   },
@@ -26,13 +26,17 @@ const suites = {
 
 const ranks = { 11: "J", 12: "Q", 13: "K", 1: "A" };
 
+const defaultHighlight = {boxShadow: "rgb(131, 227, 247) 0px 0px 7px 9px"}
+
 // heavily inspired by  https://github.com/zachwaugh/Helveticards
 
 const scale = "scale(0.7, 0.7)";
 
-const Card = ({ id, suit, rank, visible, disabled, onClick }) => {
+const Card = ({ id, suit, rank, visible, disabled, highlighted, onClick }) => {
   const suite = suites[suit];
   const rankLabel = ranks[rank] || rank;
+
+  const highlight = highlighted ? defaultHighlight : {}
 
   const handleClick = () => {
     onClick({ id, suit, rank, visible });
@@ -79,7 +83,7 @@ const Card = ({ id, suit, rank, visible, disabled, onClick }) => {
 
   return (
     <div onClick={handleClick}>
-      <div className="card" style={{ color: suite.color, transform: scale }}>
+      <div className="card" style={{ color: suite.color, transform: scale, ...highlight }}>
         <div className="front">
           <div className="corner top">
             <span className="number">{rankLabel}</span>

@@ -120,7 +120,6 @@ const possibleMoves = (card, game) => {
 };
 
 const moveCard = (game, move) => {
-  debugger;
   const newgame = cloneGame(game);
   const sourceDeck = newgame.decks[move.sourceDeck.id];
   const movedCards = sourceDeck.cards.slice(move.sourceCardIndex);
@@ -130,13 +129,53 @@ const moveCard = (game, move) => {
     last.visible = true;
   }
   movedCards.forEach((c) => newgame.decks[move.targetDeck.id].cards.push(c));
-  debugger;
   return newgame;
 };
 
-function App() {
-  const [game, setGame] = useState(toGame(shuffle(generateSpideCards(1))));
+const checkSuiteCombined = (game) => {
+  for (let deck of game.decks) {
+    const last = lastCard(deck);
+    if (last && last.rank == 1) {
+      const candidateSuite = deck.cards.slice(
+        deck.cards.length - 13,
+        deck.cards.length
+      );
+      const allSameSuiteAndVisible = candidateSuite.every(
+        (c) => c.suit == last.suit && c.visible
+      );
+      const candidateRanks = candidateSuite.map((c) => c.rank);
+      const consecutive =
+        JSON.stringify(candidateRanks) ==
+        JSON.stringify([13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
+      console.log(
+        "checkSuiteCombined",
+        allSameSuiteAndVisible,
+        candidateRanks,
+        "consecutive ?",
+        consecutive
+      );
+      if (allSameSuiteAndVisible && consecutive) {
+        debugger;
+        const newgame = cloneGame(game);
+        newgame.decks[deck.id].cards = newgame.decks[deck.id].cards.filter(
+          (c, index) => index < deck.cards.length - 13
+        );
+        const last = lastCard(newgame.decks[deck.id])
+        if (last) {
+          last.visible = true
+        }
+        return newgame;
+      }
+    }
+  }
+  return game;
+};
 
+function App() {
+  const [game, setRawGame] = useState(toGame(shuffle(generateSpideCards(1))));
+  const setGame = (game) => {
+    setRawGame(checkSuiteCombined(game));
+  };
   const distributeRemainingCards = () => {
     const newGame = cloneGame(game);
 

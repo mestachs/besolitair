@@ -1,11 +1,30 @@
+# Introduction 
+
 beSolitaire is
 
 - An attempt at creating a solitair/spider implementation
 - An opportunity to try [vite-js](https://vitejs.dev/)
+- An opportunity to learn a few things
+    - css `user-select: none;` 
+    - playing cards with [unicode](https://en.wikipedia.org/wiki/Playing_cards_in_Unicode)
 
 You can have a look at the progress [here](https://mestachs.github.io/besolitair/)
 
-developement setup
+# Roadmap
+
+  - [x] render cards and decks
+  - [x] generate cards and decks for spider
+  - [x] single click : pick first possible move
+  - [ ] add tests
+  - [ ] implements all the rules :
+       - [ ] check sequential same suite for big move
+       - [ ] distribute remaining cards only if all decks are filled
+  - [x] check you completed a suite
+  - [ ] check you won
+  - [ ] handle undo
+  - [ ] handle hint (highlight possible moves)
+
+# Developement setup
 
 ```
 yarn
