@@ -26,7 +26,7 @@ const suites = {
 
 const ranks = { 11: "J", 12: "Q", 13: "K", 1: "A" };
 
-const defaultHighlight = {boxShadow: "rgb(131, 227, 247) 0px 0px 7px 9px"}
+const defaultHighlight = { boxShadow: "rgb(131, 227, 247) 0px 0px 7px 9px" };
 
 // heavily inspired by  https://github.com/zachwaugh/Helveticards
 
@@ -36,7 +36,7 @@ const Card = ({ id, suit, rank, visible, disabled, highlighted, onClick }) => {
   const suite = suites[suit];
   const rankLabel = ranks[rank] || rank;
 
-  const highlight = highlighted ? defaultHighlight : {}
+  const highlight = highlighted ? defaultHighlight : {};
 
   const handleClick = () => {
     onClick({ id, suit, rank, visible });
@@ -51,12 +51,18 @@ const Card = ({ id, suit, rank, visible, disabled, highlighted, onClick }) => {
         }}
       >
         <div className="corner top">
-          <span className="suite" style={{ fontSize: "500%", filter: "grayscale(100%)"}}>
+          <span
+            className="suite"
+            style={{ fontSize: "500%", filter: "grayscale(100%)" }}
+          >
             {"\u26d4"}
           </span>
         </div>
         <div className="corner bottom">
-          <span className="suite" style={{ fontSize: "500%", filter: "grayscale(100%)"}}>
+          <span
+            className="suite"
+            style={{ fontSize: "500%", filter: "grayscale(100%)" }}
+          >
             {"\u26d4"}
           </span>
         </div>
@@ -67,7 +73,7 @@ const Card = ({ id, suit, rank, visible, disabled, highlighted, onClick }) => {
   if (!visible) {
     return (
       <div
-      className="card"
+        className="card"
         onClick={handleClick}
         style={{
           background: "linear-gradient(135deg, #65799b 0%,#5e2563 100%)",
@@ -83,7 +89,10 @@ const Card = ({ id, suit, rank, visible, disabled, highlighted, onClick }) => {
 
   return (
     <div onClick={handleClick}>
-      <div className="card" style={{ color: suite.color, transform: scale, ...highlight }}>
+      <div
+        className="card"
+        style={{ color: suite.color, transform: scale, ...highlight }}
+      >
         <div className="front">
           <div className="corner top">
             <span className="number">{rankLabel}</span>

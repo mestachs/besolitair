@@ -79,7 +79,8 @@ export const toGame = (cards) => {
   };
 };
 
-export const setupDefaultGame = (numberOfSuites) => toGame(shuffle(generateSpideCards(numberOfSuites)))
+export const setupDefaultGame = (numberOfSuites) =>
+  toGame(shuffle(generateSpideCards(numberOfSuites)));
 
 export const cloneGame = (game) => JSON.parse(JSON.stringify(game));
 
@@ -180,4 +181,3 @@ export const distributeRemainingCards = (game) => {
 
   return newGame;
 };
-

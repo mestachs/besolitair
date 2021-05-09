@@ -17,7 +17,9 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "c8 -r html -r text uvu",
-    "testw": "watchlist src -- c8 -r html -r text uvu"
+    "testw": "watchlist src -- c8 -r html -r text uvu",
+    "lint": "prettier --check ./src",
+    "format": "prettier --write ./src"
   },
   "dependencies": {
     "react": "^17.0.0",
