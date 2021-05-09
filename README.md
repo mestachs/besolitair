@@ -28,6 +28,7 @@ You can have a look at the progress [here](https://mestachs.github.io/besolitair
 
 ```
 yarn
+yarn test
 yarn dev
 ```
 

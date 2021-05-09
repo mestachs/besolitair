@@ -2,7 +2,8 @@ import { test } from "uvu";
 import * as assert from "uvu/assert";
 import { setupDefaultGame, cloneGame } from "./spider.js";
 
-test("setupDefaultGame", () => {
+test("setupDefaultGame", () => {  
+  
   const defaultGame = setupDefaultGame(1);
   assert.is(defaultGame.decks.length, 10);
   assert.equal(
