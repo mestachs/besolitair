@@ -15,8 +15,8 @@ test("setupDefaultGame", () => {
 test("cloneGame", () => {
   const defaultGame = setupDefaultGame(1);
   const clonedGame = cloneGame(defaultGame);
-  assert.equal(clonedGame, defaultGame);
-  assert.is.not(clonedGame, defaultGame);
+assert.equal(clonedGame, defaultGame);
+assert.is.not(clonedGame, defaultGame);
 });
 
 test.run();
