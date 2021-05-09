@@ -21,8 +21,8 @@ function App() {
     setRawGame(checkSuiteCombined(newgame));
   };
   const handleUndo = () => {
-    const previousGame = gameHistory[gameHistory.length -1];
-    setGameHistory(gameHistory.slice(0, gameHistory.length - 1 ));
+    const previousGame = gameHistory[gameHistory.length - 1];
+    setGameHistory(gameHistory.slice(0, gameHistory.length - 1));
     setRawGame(previousGame);
   };
   const handleDistributeRemainingCards = () => {
