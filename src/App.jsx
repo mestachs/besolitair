@@ -21,9 +21,9 @@ function App() {
     setRawGame(checkSuiteCombined(newgame));
   };
   const handleUndo = () => {
-    const previousGame = gameHistory.shift();
-    setGameHistory(gameHistory);
-    setGame(previousGame);
+    const previousGame = gameHistory[gameHistory.length -1];
+    setGameHistory(gameHistory.slice(0, gameHistory.length - 1 ));
+    setRawGame(previousGame);
   };
   const handleDistributeRemainingCards = () => {
     setGame(distributeRemainingCards(game));
@@ -39,7 +39,7 @@ function App() {
   return (
     <div id="table">
       <button onClick={handleUndo} disabled={gameHistory.length == 0}>
-        Undo
+        Undo {gameHistory.length}
       </button>
       {game.remaingCards.length > 0 && (
         <Card visible={false} onClick={handleDistributeRemainingCards}></Card>
