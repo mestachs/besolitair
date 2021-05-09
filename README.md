@@ -7,6 +7,7 @@ beSolitaire is
 - An opportunity to learn a few things
     - css `user-select: none;` 
     - playing cards with [unicode](https://en.wikipedia.org/wiki/Playing_cards_in_Unicode)
+    - [uvu](https://twitter.com/lukeed05/status/1283133709491662848) and c8
 
 You can have a look at the progress [here](https://mestachs.github.io/besolitair/)
 
@@ -21,8 +22,9 @@ You can have a look at the progress [here](https://mestachs.github.io/besolitair
        - [ ] distribute remaining cards only if all decks are filled
   - [x] check you completed a suite
   - [ ] check you won
-  - [ ] handle undo
+  - [x] handle undo (basic)
   - [ ] handle hint (highlight possible moves)
+  - [ ] setup github actions
 
 # Developement setup
 

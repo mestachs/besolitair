@@ -9,13 +9,21 @@ import {
   setupDefaultGame,
   possibleMoves,
   moveCard,
-  checkSuiteCombined
+  checkSuiteCombined,
 } from "./games/spider";
 
 function App() {
   const [game, setRawGame] = useState(setupDefaultGame(1));
-  const setGame = (game) => {
-    setRawGame(checkSuiteCombined(game));
+  const [gameHistory, setGameHistory] = useState([]);
+  const setGame = (newgame) => {
+    gameHistory.push(game);
+    setGameHistory(gameHistory);
+    setRawGame(checkSuiteCombined(newgame));
+  };
+  const handleUndo = () => {
+    const previousGame = gameHistory.shift();
+    setGameHistory(gameHistory);
+    setGame(previousGame);
   };
   const handleDistributeRemainingCards = () => {
     setGame(distributeRemainingCards(game));
@@ -30,6 +38,9 @@ function App() {
   };
   return (
     <div id="table">
+      <button onClick={handleUndo} disabled={gameHistory.length == 0}>
+        Undo
+      </button>
       {game.remaingCards.length > 0 && (
         <Card visible={false} onClick={handleDistributeRemainingCards}></Card>
       )}
