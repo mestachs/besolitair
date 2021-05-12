@@ -1,0 +1,640 @@
+{
+  "decks": [
+    {
+      "id": 0,
+      "cards": [
+        {
+          "id": "135a8b8e-ad65-4089-9d4c-8ebb260ff076",
+          "rank": 1,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "5a65c48a-61a7-4682-9385-aba72b65b46b",
+          "rank": 10,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "6f59c595-7c27-4f42-b60a-855e87b255d3",
+          "rank": 6,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "3ab5e015-2d06-4309-83b1-cf13305f366f",
+          "rank": 4,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "e9f6c03b-7b28-40a0-b247-e21e3d1033cc",
+          "rank": 4,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "d250f423-c966-44cf-88ca-c089bfe06de2",
+          "rank": 10,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "a690b506-8fc0-4a3d-a736-9269cc69ff06",
+          "rank": 2,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "cards": [
+        {
+          "id": "4104cfd4-399d-44ae-a087-614bbe8a1adc",
+          "rank": 13,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "edc2ebf7-67c5-47fb-9280-c905573ee2cd",
+          "rank": 11,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "683f102c-edce-4fcf-8f79-5d089bbbb5c1",
+          "rank": 6,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "35be577b-2dad-486a-a652-c0283d700475",
+          "rank": 1,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "283f9d6f-e1c5-48ba-9130-8e41013395fa",
+          "rank": 11,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "f762c7b4-1f69-4ce3-9a9e-82edb1b511bd",
+          "rank": 10,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "73f766c8-616a-4860-ad08-76e9bc73c756",
+          "rank": 4,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "cards": [
+        {
+          "id": "82d64089-7d67-430b-86bd-480a1e2c7f82",
+          "rank": 7,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "1dda975e-719b-4e8c-9bde-9806ee082ff2",
+          "rank": 7,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "9172d303-77c0-49c4-a1b2-34e24a785c78",
+          "rank": 8,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "4f76bd57-0a7c-4d0a-a26e-fe226e946067",
+          "rank": 12,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "719b93a2-e1fd-46ae-a747-d6fe02834209",
+          "rank": 1,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "d35d5baf-52e0-450b-a40d-64fccaa9ac37",
+          "rank": 6,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "158adf56-47ba-4112-93dd-d11e317c6579",
+          "rank": 12,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "cards": [
+        {
+          "id": "b32e7c21-f460-468b-a598-514d569c8d33",
+          "rank": 12,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "ca938886-bd85-4652-91ab-9faabe76a028",
+          "rank": 6,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "60d49939-1f72-4d30-ad9e-83d3eb84b980",
+          "rank": 9,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "36f4b566-724e-4cf7-8787-0f68475a85ff",
+          "rank": 2,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "d5c29c0d-378d-4ab4-a779-85fa90f9f8ff",
+          "rank": 9,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "61f68d62-181b-4140-b40a-b7e898262111",
+          "rank": 7,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "2b59bbea-61db-4fd5-b157-fd5331de64e0",
+          "rank": 6,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "cards": [
+        {
+          "id": "65fdc0fd-b22d-4674-82fc-0cac2362b815",
+          "rank": 5,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "12b7a8dc-d34f-4b07-9931-ae1ad0c8a854",
+          "rank": 10,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "b1b6f31d-7b3c-46cb-962d-17c55af5bfa9",
+          "rank": 9,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "e25352f2-7e6d-47d9-878a-80c029f102ff",
+          "rank": 4,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "4a4dd00e-882e-4d27-8b50-be4d5451a714",
+          "rank": 5,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "00d839f8-5c6d-4d10-b2d9-8704b246f41f",
+          "rank": 12,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "cards": [
+        {
+          "id": "17e8ccc5-a2a3-4111-a438-4636252dd09e",
+          "rank": 2,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "82967e65-1033-4b89-ad7a-e9d230fee041",
+          "rank": 11,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "9fa64730-4533-4047-bc6e-35ee041d0696",
+          "rank": 3,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "d41320b0-4dcd-4fad-83d2-9b87544f58db",
+          "rank": 1,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "1163a300-2a78-440a-b7e4-71b56355f816",
+          "rank": 8,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "8338ff1f-a712-40ab-9078-db42a6ff9405",
+          "rank": 13,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "cards": [
+        {
+          "id": "367e42d6-ff65-49b2-8cdb-d7fe24015c09",
+          "rank": 10,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "672bc516-d00c-40fe-b0d9-228f8688cabd",
+          "rank": 1,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "b71aeaf1-1be4-47e8-b434-c3a31c2d552b",
+          "rank": 10,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "37af990e-bcb1-451d-8f0f-a617674823f8",
+          "rank": 3,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "90115b4b-82a7-4018-985d-ca91b3879260",
+          "rank": 2,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "a5e2a07f-70a4-40a6-bb21-1ea0939538cf",
+          "rank": 11,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "cards": [
+        {
+          "id": "5371ad48-4316-48a1-bcd8-e1e80e4391b2",
+          "rank": 11,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "b902a269-de38-4461-8cfe-4f29f9ffbcd3",
+          "rank": 12,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "b6d39ed2-6815-4518-b1b3-36b5d79a596b",
+          "rank": 1,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "8be396e7-5120-49f9-bc20-67652789fe8e",
+          "rank": 9,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "542f3794-17f6-4022-8f55-8a8a0fe22b0e",
+          "rank": 9,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "27be9a56-3282-418e-b1ee-ec01551ab783",
+          "rank": 2,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "cards": [
+        {
+          "id": "9896cb68-6eae-4e1d-ba95-989784c4ca00",
+          "rank": 2,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "61fa81b9-8e57-436c-8b24-677459645e8d",
+          "rank": 7,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "dbeb18c7-e841-42a5-bf53-20297711b4ce",
+          "rank": 8,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "c37b899a-2d03-496e-91c8-931d118eccc8",
+          "rank": 13,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "acba4a60-ba91-4d08-ba48-8a60a67792f3",
+          "rank": 11,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "b4b0b48b-51b1-47d4-b082-57f3fa2433a4",
+          "rank": 3,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "cards": [
+        {
+          "id": "d4d60f43-e182-4227-bcbc-3570796c36a7",
+          "rank": 9,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "c158e5d9-97ba-4d37-ba8f-9318edd3b9d8",
+          "rank": 6,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "dd4f03ea-5391-4921-84fe-32c903375ff9",
+          "rank": 4,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "974dca83-ea89-4aac-ad36-76a36df0aae2",
+          "rank": 4,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "a6b51ea6-df59-4ce0-81bf-d0e2d9942306",
+          "rank": 5,
+          "suit": "spades",
+          "visible": false
+        },
+        {
+          "id": "fa53a70d-c350-4c69-84e9-4d64da2c5983",
+          "rank": 8,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "remaingCards": [
+    {
+      "id": "c4c97c96-a5a3-4524-b1e6-15070f54c52c",
+      "rank": 3,
+      "suit": "spades"
+    },
+    {
+      "id": "bbf9551c-f302-4f1f-8e84-6b4f566c84d7",
+      "rank": 4,
+      "suit": "spades"
+    },
+    {
+      "id": "0f3c2ae4-5c15-4673-8692-3ba0e9709b52",
+      "rank": 8,
+      "suit": "spades"
+    },
+    {
+      "id": "eb691beb-d3f3-47d3-8ce7-5b038b0a8191",
+      "rank": 7,
+      "suit": "spades"
+    },
+    {
+      "id": "3076fc17-03b4-4535-ba4f-21a87192dc46",
+      "rank": 8,
+      "suit": "spades"
+    },
+    {
+      "id": "499fb104-e51a-4367-8b7c-411021c54c71",
+      "rank": 13,
+      "suit": "spades"
+    },
+    {
+      "id": "fc390e08-6c26-4b74-a9b5-db2589331a89",
+      "rank": 4,
+      "suit": "spades"
+    },
+    {
+      "id": "871e2ad1-ce1a-4896-b9b7-85a19e598355",
+      "rank": 9,
+      "suit": "spades"
+    },
+    {
+      "id": "7722c12f-4575-4ce4-a2d1-a39df4937333",
+      "rank": 5,
+      "suit": "spades"
+    },
+    {
+      "id": "43d58941-1a36-4517-a9ca-b2c9f181a486",
+      "rank": 1,
+      "suit": "spades"
+    },
+    {
+      "id": "75fd0028-469b-486f-9433-89069440b831",
+      "rank": 3,
+      "suit": "spades"
+    },
+    {
+      "id": "4db8b59f-2a65-4e5e-bd2e-2fa1b4094afe",
+      "rank": 7,
+      "suit": "spades"
+    },
+    {
+      "id": "35b838c9-6cb6-4034-a173-9122280d73a9",
+      "rank": 8,
+      "suit": "spades"
+    },
+    {
+      "id": "42e92b6b-83bb-46a6-b4fe-d1fd98f4a6e7",
+      "rank": 12,
+      "suit": "spades"
+    },
+    {
+      "id": "500d1e93-3c17-4e32-8886-45c6f9750af9",
+      "rank": 5,
+      "suit": "spades"
+    },
+    {
+      "id": "43b5e3b2-76b6-42e0-96b5-549cf4ecbc30",
+      "rank": 13,
+      "suit": "spades"
+    },
+    {
+      "id": "64dc2fad-319d-4a58-8b0e-2965c910833a",
+      "rank": 9,
+      "suit": "spades"
+    },
+    {
+      "id": "085730ba-6674-4583-8ce4-ac5ca9858140",
+      "rank": 12,
+      "suit": "spades"
+    },
+    {
+      "id": "d3acaa62-32a3-46d9-88cc-ded51ab7243d",
+      "rank": 7,
+      "suit": "spades"
+    },
+    {
+      "id": "837157c7-ec11-46f9-a37e-961a323b635b",
+      "rank": 3,
+      "suit": "spades"
+    },
+    {
+      "id": "57c1efd5-daf9-45ce-97d9-ba363c1b8271",
+      "rank": 6,
+      "suit": "spades"
+    },
+    {
+      "id": "0db1dc58-52cc-4ebb-94ab-76125750630f",
+      "rank": 2,
+      "suit": "spades"
+    },
+    {
+      "id": "40e01fd1-09dd-4947-a968-59c46c3da099",
+      "rank": 13,
+      "suit": "spades"
+    },
+    {
+      "id": "0aa549e9-8345-4a2b-a41d-b3d120c4f4b1",
+      "rank": 1,
+      "suit": "spades"
+    },
+    {
+      "id": "843ba89a-7200-4a43-9053-601bf6d46711",
+      "rank": 2,
+      "suit": "spades"
+    },
+    {
+      "id": "60e71a8f-64d9-4001-8920-15b7e0484727",
+      "rank": 5,
+      "suit": "spades"
+    },
+    {
+      "id": "d1f8977a-51ba-46de-88f4-8b58dc5ec27e",
+      "rank": 5,
+      "suit": "spades"
+    },
+    {
+      "id": "0b20dd02-3ba8-4c59-a8c2-9f808fe10397",
+      "rank": 5,
+      "suit": "spades"
+    },
+    {
+      "id": "665ab893-4cac-44f0-a944-39f3978b47bb",
+      "rank": 6,
+      "suit": "spades"
+    },
+    {
+      "id": "db58bcd4-be99-4573-a951-dace3b02da18",
+      "rank": 11,
+      "suit": "spades"
+    },
+    {
+      "id": "0d27f185-90c2-47e8-bb6b-59849c87016e",
+      "rank": 3,
+      "suit": "spades"
+    },
+    {
+      "id": "6231327b-defd-497c-830b-6676f78144a6",
+      "rank": 3,
+      "suit": "spades"
+    },
+    {
+      "id": "da7a20cf-75d8-4af5-a137-ed7216f60bae",
+      "rank": 10,
+      "suit": "spades"
+    },
+    {
+      "id": "d36ee50b-3d65-4629-8468-a99a80e57ba9",
+      "rank": 10,
+      "suit": "spades"
+    },
+    {
+      "id": "caab9d85-20c9-4ce7-b50c-04780c3c719c",
+      "rank": 13,
+      "suit": "spades"
+    },
+    {
+      "id": "c612af33-f825-4afa-b0cd-4efd5b1369c6",
+      "rank": 7,
+      "suit": "spades"
+    },
+    {
+      "id": "6ed8b943-952f-4bbf-bd3b-c970295f08ae",
+      "rank": 8,
+      "suit": "spades"
+    },
+    {
+      "id": "f2a419f6-ebe9-4ccd-b080-722afaea2ee5",
+      "rank": 12,
+      "suit": "spades"
+    },
+    {
+      "id": "50ebbb98-166b-4ed3-8778-b3f81ebf3a91",
+      "rank": 11,
+      "suit": "spades"
+    },
+    {
+      "id": "fd30b7e0-25e5-4c68-b785-c861d3c812a6",
+      "rank": 13,
+      "suit": "spades"
+    }
+  ]
+}
