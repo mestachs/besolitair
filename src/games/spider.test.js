@@ -1,7 +1,12 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
-import { setupDefaultGame, cloneGame, possibleMoves } from "./spider.js";
-import fs from "fs"
+import {
+  setupDefaultGame,
+  cloneGame,
+  possibleMoves,
+  moveCard,
+} from "./spider.js";
+import fs from "fs";
 
 test("setupDefaultGame", () => {
   const defaultGame = setupDefaultGame(1);
@@ -21,12 +26,36 @@ test("cloneGame", () => {
 });
 
 test("possibleMoves", () => {
-  const game = JSON.parse(fs.readFileSync('./src/games/spider-fixture.json', 'utf8'))
-  const card = game.decks[0].cards[game.decks[0].cards.length - 1 ]
+  const game = JSON.parse(
+    fs.readFileSync("./src/games/spider-fixture.json", "utf8")
+  );
+  const card = game.decks[0].cards[game.decks[0].cards.length - 1];
   const moves = possibleMoves(card, game);
-  const move = moves[0]
+  const move = moves[0];
   assert.equal(move.sourceDeck.id, 0);
   assert.equal(move.targetDeck.id, 8);
+
+  const nextGame = moveCard(game, move);
+  // the card has moved to deck 8
+  assert.equal(
+    nextGame.decks[8].cards[nextGame.decks[8].cards.length - 1],
+    card
+  );
+
+  // last card on the first deck is now visible
+  assert.equal(game.decks[0].cards[game.decks[0].cards.length - 2], {
+    id: "d250f423-c966-44cf-88ca-c089bfe06de2",
+    rank: 10,
+    suit: "spades",
+    visible: false,
+  });
+
+  assert.equal(nextGame.decks[0].cards[nextGame.decks[0].cards.length - 1], {
+    id: "d250f423-c966-44cf-88ca-c089bfe06de2",
+    rank: 10,
+    suit: "spades",
+    visible: true,
+  });
 });
 
 test.run();
