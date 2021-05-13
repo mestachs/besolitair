@@ -10,11 +10,26 @@ import {
   possibleMoves,
   moveCard,
   checkSuiteCombined,
+  allPossibleMoves,
 } from "./games/spider";
 
 function App() {
+  const [date, setDate] = React.useState(new Date());
+
+  function tick() {
+    setDate(new Date());
+  }
+
+  React.useEffect(() => {
+    var timerID = setInterval(() => tick(), 1000);
+    return function cleanup() {
+      clearInterval(timerID);
+    };
+  });
+
   const [game, setRawGame] = useState(setupDefaultGame(1));
   const [gameHistory, setGameHistory] = useState([]);
+  const [highlightedCards, setHightlightedCards] = useState(new Set());
   const setGame = (newgame) => {
     gameHistory.push(game);
     setGameHistory(gameHistory);
@@ -36,13 +51,48 @@ function App() {
       setGame(newGame);
     }
   };
+
+  const showHint = () => {
+    const moves = allPossibleMoves(game);
+    setHightlightedCards(new Set(moves.map((m) => m.card.id)));
+  };
+  const resetHighlighted = () => setHightlightedCards(new Set());
+
+  const handleKeyDown = (event) => {
+    console.log("event key down");
+    if (event.key == "h") {
+      showHint();
+    }
+  };
+
   return (
-    <div id="table">
+    <div
+      id="table"
+      onKeyDown={handleKeyDown}
+      onKeyUp={resetHighlighted}
+      tabIndex={0}
+    >
       <button onClick={handleUndo} disabled={gameHistory.length == 0}>
-        Undo {gameHistory.length}
+        Undo
       </button>
+
+      <span style={{ fontSize: "18px", marginLeft: "20px" }}>
+        {gameHistory.length == 0 ? (
+          <span><br />Click on a card to move it to one of the allowed deck. <br />Stuck ? press h to find possible movements.
+          </span>
+        ) : (
+          <span>
+            Already {gameHistory.length} moves, {game.remaingCards.length} cards
+            left, {date.toLocaleTimeString()}
+          </span>
+        )}
+      </span>
+  
       {game.remaingCards.length > 0 && (
-        <Card visible={false} onClick={handleDistributeRemainingCards}></Card>
+        <span style={{ display: "block" }}>
+          <Card visible={false} onClick={handleDistributeRemainingCards}></Card>
+          <br></br>
+        </span>
       )}
       {game.remaingCards.length == 0 && <Card disabled={true}></Card>}
       <div
@@ -60,6 +110,7 @@ function App() {
                         key={card.id}
                         {...card}
                         onClick={onClickCard}
+                        highlighted={highlightedCards.has(card.id)}
                       ></Card>
                     </>
                   );

@@ -5,6 +5,7 @@ import {
   cloneGame,
   possibleMoves,
   moveCard,
+  isASuite,
 } from "./spider.js";
 import fs from "fs";
 
@@ -23,6 +24,15 @@ test("cloneGame", () => {
   const clonedGame = cloneGame(defaultGame);
   assert.equal(clonedGame, defaultGame);
   assert.is.not(clonedGame, defaultGame);
+});
+
+test("isASuite", () => {
+  const asuite = isASuite([
+    { rank: 4, suit: "spades", visible: true },
+    { rank: 3, suit: "spades", visible: true },
+    { rank: 2, suit: "spades", visible: true },
+  ]);
+  assert.is(asuite, true);
 });
 
 test("possibleMoves", () => {

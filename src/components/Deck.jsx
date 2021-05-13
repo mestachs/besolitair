@@ -8,7 +8,7 @@ const Deck = ({ deck, children }) => {
           key={index}
           style={{
             position: "relative",
-            top: -index * 220,
+            top: -index * 235,
           }}
         >
           {c}

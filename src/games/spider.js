@@ -86,34 +86,65 @@ export const cloneGame = (game) => JSON.parse(JSON.stringify(game));
 
 export const lastCard = (deck) => deck.cards[deck.cards.length - 1];
 
+export const isASuite = (cards) => {
+  if (cards.length == 1) {
+    return true;
+  }
+  let previous = cards[0];
+  for (let card of cards.slice(1)) {
+    if (card.rank != (previous.rank - 1) ) {
+      return false;
+    }
+    previous = card;
+  }
+  return true;
+};
+
 export const possibleMoves = (card, game) => {
   const moves = [];
   if (card.visible) {
     for (let deck of game.decks) {
       const cardIndex = deck.cards.findIndex((c) => c.id === card.id);
-      if (cardIndex >= 0) {
-        const playableDecks = game.decks.filter((deck) => {
-          const candidateCard = lastCard(deck);
-          if (candidateCard == undefined) {
-            return true;
-          }
-          if (candidateCard.rank - 1 == card.rank) {
-            return true;
-          }
-        });
 
-        playableDecks.forEach((targetDeck) =>
-          moves.push({
-            card: card,
-            sourceDeck: deck,
-            sourceCardIndex: cardIndex,
-            targetDeck: targetDeck,
-          })
-        );
+      if (cardIndex >= 0) {
+        const selectedCards = deck.cards.slice(cardIndex,deck.cards.length);
+        const asuite = isASuite(selectedCards);
+        debugger;
+        if (asuite) {
+          const playableDecks = game.decks.filter((deck) => {
+            const candidateCard = lastCard(deck);
+            if (candidateCard == undefined) {
+              return true;
+            }
+            if (candidateCard.rank - 1 == card.rank) {
+              return true;
+            }
+          });
+
+          playableDecks.forEach((targetDeck) =>
+            moves.push({
+              card: card,
+              sourceDeck: deck,
+              sourceCardIndex: cardIndex,
+              targetDeck: targetDeck,
+            })
+          );
+        }
       }
     }
   }
   return moves;
+};
+
+export const allPossibleMoves = (game) => {
+  let results = [];
+  for (let deck of game.decks) {
+    for (let card of deck.cards.filter((c) => c.visible)) {
+      const moves = possibleMoves(card, game);
+      results = results.concat(moves);
+    }
+  }
+  return results;
 };
 
 export const moveCard = (game, move) => {
