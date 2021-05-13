@@ -80,7 +80,7 @@ export const toGame = (cards) => {
 };
 
 export const setupDefaultGame = (numberOfSuites) =>
-  toGame(shuffle(generateSpideCards(numberOfSuites)));
+  toGame(shuffle(shuffle(generateSpideCards(numberOfSuites))));
 
 export const cloneGame = (game) => JSON.parse(JSON.stringify(game));
 
@@ -92,7 +92,7 @@ export const isASuite = (cards) => {
   }
   let previous = cards[0];
   for (let card of cards.slice(1)) {
-    if (card.rank != (previous.rank - 1) ) {
+    if (card.rank != previous.rank - 1) {
       return false;
     }
     previous = card;
@@ -107,9 +107,8 @@ export const possibleMoves = (card, game) => {
       const cardIndex = deck.cards.findIndex((c) => c.id === card.id);
 
       if (cardIndex >= 0) {
-        const selectedCards = deck.cards.slice(cardIndex,deck.cards.length);
+        const selectedCards = deck.cards.slice(cardIndex, deck.cards.length);
         const asuite = isASuite(selectedCards);
-        debugger;
         if (asuite) {
           const playableDecks = game.decks.filter((deck) => {
             const candidateCard = lastCard(deck);
@@ -175,15 +174,7 @@ export const checkSuiteCombined = (game) => {
       const consecutive =
         JSON.stringify(candidateRanks) ==
         JSON.stringify([13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
-      console.log(
-        "checkSuiteCombined",
-        allSameSuiteAndVisible,
-        candidateRanks,
-        "consecutive ?",
-        consecutive
-      );
       if (allSameSuiteAndVisible && consecutive) {
-        debugger;
         const newgame = cloneGame(game);
         newgame.decks[deck.id].cards = newgame.decks[deck.id].cards.filter(
           (c, index) => index < deck.cards.length - 13
@@ -201,6 +192,13 @@ export const checkSuiteCombined = (game) => {
 
 export const distributeRemainingCards = (game) => {
   const newGame = cloneGame(game);
+ 
+  if (game.decks.some((deck) => deck.cards.length == 0)) {
+    alert(
+      "All decks should have at least one card to distribute remaining cards"
+    );
+    return newGame;
+  }
 
   const cards = newGame.remaingCards;
   for (let deckIndex = 0; deckIndex < 10; deckIndex++) {
