@@ -13,6 +13,8 @@ import {
   allPossibleMoves,
 } from "./games/spider";
 
+const randomItem = items => items[Math.floor(Math.random() * items.length)];
+
 function App() {
   const [date, setDate] = React.useState(new Date());
 
@@ -63,6 +65,15 @@ function App() {
     if (event.key == "h") {
       showHint();
     }
+
+    if (event.key == "p") {
+      const moves = allPossibleMoves(game);
+      if (moves.length > 0) {
+        //TODO get smarter take a better heuristic
+        const newGame = moveCard(game, randomItem(moves));
+        setGame(newGame);
+      }
+    }
   };
 
   return (
@@ -79,6 +90,7 @@ function App() {
       <span style={{ fontSize: "18px", marginLeft: "20px" }}>
         {gameHistory.length == 0 ? (
           <span><br />Click on a card to move it to one of the allowed deck. <br />Stuck ? press h to find possible movements.
+          <br /> Lazy & lucky ? press p to randomly play.
           </span>
         ) : (
           <span>
