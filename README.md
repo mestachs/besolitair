@@ -18,12 +18,12 @@ You can have a look at the progress [here](https://mestachs.github.io/besolitair
   - [x] single click : pick first possible move
   - [ ] add tests
   - [ ] implements all the rules :
-       - [ ] check sequential same suite for big move
+       - [x] check sequential same suite for big move
        - [ ] distribute remaining cards only if all decks are filled
   - [x] check you completed a suite
   - [ ] check you won and [celebrate](https://github.com/crashmax-off/fireworks-js/)
   - [x] handle undo (basic)
-  - [ ] handle hint (highlight possible moves)
+  - [x] handle hint (highlight possible moves)
   - [ ] setup github actions
 
 # Developement setup
