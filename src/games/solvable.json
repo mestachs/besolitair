@@ -1,0 +1,211 @@
+{
+  "decks": [
+    {
+      "id": 0,
+      "cards": [
+        {
+          "id": "b800ad2a-5e49-4e94-9ad1-ed9dd7ef41ea",
+          "rank": 12,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "378d87f2-f14a-4248-a865-2dd8fb6f816f",
+          "rank": 11,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "56f103ae-972e-4448-ab04-fe5b4adbc3f6",
+          "rank": 6,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "cards": [
+        {
+          "id": "50267c70-0ce3-4b74-a0ff-4853537b1167",
+          "rank": 8,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "2433abd6-8fc3-4c72-b2ad-686df82912e4",
+          "rank": 7,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "a700be46-b2cc-40b5-8dff-d9726f3cf54f",
+          "rank": 1,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "cards": [
+        {
+          "id": "74e2d1f0-93bd-4726-8fd5-1632bf7f153d",
+          "rank": 10,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "d79228f5-7ead-4ba2-a921-1a79e405c636",
+          "rank": 10,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "cards": [
+        {
+          "id": "557ad7df-407c-4e91-9809-51f509fc89ac",
+          "rank": 7,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "4c9654f5-842e-4b74-926d-5c19413b104c",
+          "rank": 6,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "cards": [
+        {
+          "id": "52305246-ee87-4932-a95f-de0322b356f6",
+          "rank": 12,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "c9be7540-c377-40f8-b270-df4d9d700c9a",
+          "rank": 9,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "cards": [
+        {
+          "id": "ae3db6de-36f3-40bd-88b8-231ad9764c0b",
+          "rank": 3,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "dfe0ed83-15da-4678-a771-ed73950b07d3",
+          "rank": 2,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "878baeab-16d6-41e9-8a9b-425081de984f",
+          "rank": 11,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "cards": [
+        {
+          "id": "40198ccd-6a61-4b24-aa41-41160d26a2a3",
+          "rank": 3,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "b08861df-b6e1-45be-a3af-54409660c83a",
+          "rank": 2,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "cards": [
+        {
+          "id": "2c943138-c163-49f0-bfc6-598e93b5cd26",
+          "rank": 1,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "8e2b39a6-d7a6-4a11-a9cf-dd64b2274b9c",
+          "rank": 13,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "cards": [
+        {
+          "id": "79033539-ac51-4a47-9f2f-506ca4db6adb",
+          "rank": 5,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "472377f6-a838-4611-918e-657e4a312596",
+          "rank": 4,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "cards": [
+        {
+          "id": "ab8d1e1b-473c-43d9-a840-74ff7d5bdf7f",
+          "rank": 9,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "449265c7-7eaf-44d9-8a10-2a2f713652b6",
+          "rank": 8,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "0399db82-d0e1-4da9-acea-e90fd824c452",
+          "rank": 5,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "52ec8fdb-7dbb-4187-b008-ddb86c11447b",
+          "rank": 4,
+          "suit": "spades",
+          "visible": true
+        },
+        {
+          "id": "b26f8a24-7050-47a0-90f0-ac4fed206bc5",
+          "rank": 13,
+          "suit": "spades",
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "remaingCards": []
+}

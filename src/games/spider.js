@@ -45,7 +45,7 @@ export const generateSpideCards = (numberOfSuites) => {
   throw new Error("Only 1 or 2 suites supported");
 };
 
-export const shuffle = (cards) => cards.sort((a, b) => 0.5 - Math.random());
+export const shuffle = (cards) => cards.sort((a, b) => 0.2 - Math.random());
 
 export const toGame = (cards) => {
   const decks = [];
@@ -190,9 +190,18 @@ export const checkSuiteCombined = (game) => {
   return game;
 };
 
+export const checkWon = (game) => {
+  const allDeckEmpty = game.decks.every((deck) => deck.cards.length == 0)
+  const noRemainingCards = game.remaingCards.length == 0
+  if (allDeckEmpty && noRemainingCards) {
+    game.status= "won"
+  }
+  return game
+}
+
 export const distributeRemainingCards = (game) => {
   const newGame = cloneGame(game);
- 
+
   if (game.decks.some((deck) => deck.cards.length == 0)) {
     alert(
       "All decks should have at least one card to distribute remaining cards"
@@ -210,3 +219,19 @@ export const distributeRemainingCards = (game) => {
 
   return newGame;
 };
+
+export const randomItem = (items) =>
+  shuffle(items)[Math.floor(Math.random() * items.length)];
+
+export const numberOfHidenCards = (game) =>
+  game.decks
+    .map((deck) => deck.cards.filter((c) => c.visible == false).length)
+    .reduce((a, b) => a + b, 0);
+
+export const numberOfCards = (game) =>
+  game.decks.map((deck) => deck.cards.length).reduce((a, b) => a + b, 0);
+
+export const biggestDeckCards = (game) =>
+  Math.max(
+    ...game.decks.map((deck) => deck.cards.filter((c) => c.visible).length)
+  );

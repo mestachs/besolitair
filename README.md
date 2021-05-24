@@ -17,14 +17,25 @@ You can have a look at the progress [here](https://mestachs.github.io/besolitair
   - [x] generate cards and decks for spider
   - [x] single click : pick first possible move
   - [ ] add tests
-  - [ ] implements all the rules :
+  - [x] implements all the rules :
        - [x] check sequential same suite for big move
-       - [ ] distribute remaining cards only if all decks are filled
+       - [x] distribute remaining cards only if all decks are filled
   - [x] check you completed a suite
-  - [ ] check you won and [celebrate](https://github.com/crashmax-off/fireworks-js/)
+  - [x] check you won 
+  - [ ] if won then [celebrate](https://github.com/crashmax-off/fireworks-js/)
+  - [ ] make it pretty and more usable
+       - [ ] animation
+       - [ ] drag and drop
+       - [ ] play card sound
+       - [ ] play radio/music
   - [x] handle undo (basic)
   - [x] handle hint (highlight possible moves)
+  - [ ] implement auto play with some heuristics
   - [ ] setup github actions
+  - [ ] add features to ease test 
+      - [x] export game state, 
+      - [x] load nearly solved game
+      - [ ] enabled these feature only in local
 
 # Developement setup
 

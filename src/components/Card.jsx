@@ -88,7 +88,7 @@ const Card = ({ id, suit, rank, visible, disabled, highlighted, onClick }) => {
   }
 
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick}  draggable="true">
       <div
         className="card"
         style={{ color: suite.color, transform: scale, ...highlight }}

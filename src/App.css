@@ -40,3 +40,14 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+.blink {
+  color: #005800;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
