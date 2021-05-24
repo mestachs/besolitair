@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+
 
 const Deck = ({ deck, children }) => {
+
   return (
     <div style={{ display: "inline-block" }}>
       {children.map((c, index) => (

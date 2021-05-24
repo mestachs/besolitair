@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { format } from "timeago.js";
 import Deck from "./components/Deck";
 import Card from "./components/Card";
 import "./App.css";
-
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import solvable from "./games/solvable.json";
 
 import {
@@ -139,90 +139,125 @@ function App() {
     }
   };
 
+  const onDropped = (droppedCard, targetCard, deck) => {
+    console.log("dropping ", droppedCard, "on ", targetCard);
+    let moves = allPossibleMoves(game);
+    const selectedMove = moves.find((move) => {
+      const sameMovedCard = move.card.id == droppedCard.id;
+      const lastCardDeck =
+        move.targetDeck.cards[move.targetDeck.cards.length - 1];
+      if (targetCard) {
+        return (
+          sameMovedCard && lastCardDeck && lastCardDeck.id == targetCard.id
+        );
+      } else if (deck) {
+        return sameMovedCard && move.targetDeck.id == deck.id;
+      }
+    });
+    debugger;
+    const newGame = moveCard(game, selectedMove);
+    setGame(newGame);
+  };
+
   return (
-    <div
-      id="table"
-      onKeyDown={handleKeyDown}
-      onKeyUp={resetHighlighted}
-      tabIndex={0}
-    >
-      <button onClick={handleUndo} disabled={gameHistory.length == 0}>
-        Undo
-      </button>
+    <DndProvider backend={HTML5Backend}>
+      <div
+        id="table"
+        onKeyDown={handleKeyDown}
+        onKeyUp={resetHighlighted}
+        tabIndex={0}
+      >
+        <button onClick={handleUndo} disabled={gameHistory.length == 0}>
+          Undo
+        </button>
 
-      {game.status == "won" && (
-        <h1 className="blink">You Won !!!!!!!!!!!!!!!!!!</h1>
-      )}
+        {game.status == "won" && (
+          <h1 className="blink">You Won !!!!!!!!!!!!!!!!!!</h1>
+        )}
 
-      <span style={{ fontSize: "18px", marginLeft: "20px" }}>
-        {gameHistory.length == 0 ? (
-          <span>
-            <br />
-            Click on a card to move it to one of the allowed deck. <br />
-            Stuck ? press h to find possible movements.
-            <br /> Lazy & lucky ? press p to randomly play.
-          </span>
-        ) : (
-          <span>
-            Already {gameHistory.length} moves, {game.remaingCards.length} cards
-            left, {date.toLocaleTimeString()},{" "}
-            {sec2time(new Date() - startedAt)}
+        <span style={{ fontSize: "18px", marginLeft: "20px" }}>
+          {gameHistory.length == 0 ? (
+            <span>
+              <br />
+              Click on a card to move it to one of the allowed deck. <br />
+              Stuck ? press h to find possible movements.
+              <br /> Lazy & lucky ? press p to randomly play.
+            </span>
+          ) : (
+            <span>
+              Already {gameHistory.length} moves, {game.remaingCards.length}{" "}
+              cards left, {date.toLocaleTimeString()},{" "}
+              {sec2time(new Date() - startedAt)}
+            </span>
+          )}
+        </span>
+
+        {game.remaingCards.length > 0 && (
+          <span style={{ display: "block" }}>
+            <Card
+              visible={false}
+              onClick={handleDistributeRemainingCards}
+            ></Card>
+            <br></br>
           </span>
         )}
-      </span>
+        {game.remaingCards.length == 0 && <Card disabled={true}></Card>}
+        <div
+          id="cards"
+          style={{ display: "flex", justifyContent: "space-around" }}
+        >
+          {game.decks.map((deck, index) => {
+            return (
+              <Deck key={deck.id} deck={index}>
+                {deck.cards
+                  .map((card) => {
+                    return (
+                      <>
+                        <Card
+                          key={card.id}
+                          {...card}
+                          onClick={onClickCard}
+                          onDropped={onDropped}
+                          highlighted={highlightedCards.has(card.id)}
+                        ></Card>
+                      </>
+                    );
+                  })
+                  .concat(
+                    deck.cards.length == 0
+                      ? [
+                          <Card
+                            disabled={true}
+                            onDropped={(dropped) =>
+                              onDropped(dropped, undefined, deck)
+                            }
+                          />,
+                        ]
+                      : []
+                  )}
+              </Deck>
+            );
+          })}
+        </div>
 
-      {game.remaingCards.length > 0 && (
-        <span style={{ display: "block" }}>
-          <Card visible={false} onClick={handleDistributeRemainingCards}></Card>
-          <br></br>
-        </span>
-      )}
-      {game.remaingCards.length == 0 && <Card disabled={true}></Card>}
-      <div
-        id="cards"
-        style={{ display: "flex", justifyContent: "space-around" }}
-      >
-        {game.decks.map((deck, index) => {
-          return (
-            <Deck key={deck.id} deck={index}>
-              {deck.cards
-                .map((card) => {
-                  return (
-                    <>
-                      <Card
-                        key={card.id}
-                        {...card}
-                        onClick={onClickCard}
-                        highlighted={highlightedCards.has(card.id)}
-                      ></Card>
-                    </>
-                  );
-                })
-                .concat(
-                  deck.cards.length == 0 ? [<Card disabled={true} />] : []
-                )}
-            </Deck>
-          );
-        })}
+        <button
+          onClick={() => {
+            copyToClipboard(JSON.stringify(game));
+          }}
+        >
+          Copy game state
+        </button>
+
+        <button
+          onClick={() => {
+            setGame(solvable);
+            setGameHistory([]);
+          }}
+        >
+          Load solvable
+        </button>
       </div>
-
-      <button
-        onClick={() => {
-          copyToClipboard(JSON.stringify(game));
-        }}
-      >
-        Copy game state
-      </button>
-
-      <button
-        onClick={() => {
-          setGame(solvable);
-          setGameHistory([]);
-        }}
-      >
-        Load solvable
-      </button>
-    </div>
+    </DndProvider>
   );
 }
 

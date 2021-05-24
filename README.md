@@ -25,7 +25,7 @@ You can have a look at the progress [here](https://mestachs.github.io/besolitair
   - [ ] if won then [celebrate](https://github.com/crashmax-off/fireworks-js/)
   - [ ] make it pretty and more usable
        - [ ] animation
-       - [ ] drag and drop
+       - [x] drag and drop
        - [ ] play card sound
        - [ ] play radio/music
   - [x] handle undo (basic)

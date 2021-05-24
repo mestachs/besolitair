@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDrag, useDrop } from "react-dnd";
 
 // https://en.wikipedia.org/wiki/Playing_cards_in_Unicode
 const suites = {
@@ -32,7 +33,38 @@ const defaultHighlight = { boxShadow: "rgb(131, 227, 247) 0px 0px 7px 9px" };
 
 const scale = "scale(0.7, 0.7)";
 
-const Card = ({ id, suit, rank, visible, disabled, highlighted, onClick }) => {
+const Card = ({
+  id,
+  suit,
+  rank,
+  visible,
+  disabled,
+  highlighted,
+  onClick,
+  onDropped,
+}) => {
+  const card = { id, suit, rank, visible, disabled, highlighted, onClick };
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "card",
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+    item: card,
+  }));
+
+  const [{ isOver }, drop] = useDrop(
+    () => ({
+      accept: "card",
+      drop: (item) => {
+        onDropped(item, card);
+      },
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+      }),
+    }),
+    [card]
+  );
+
   const suite = suites[suit];
   const rankLabel = ranks[rank] || rank;
 
@@ -45,6 +77,7 @@ const Card = ({ id, suit, rank, visible, disabled, highlighted, onClick }) => {
   if (disabled) {
     return (
       <div
+        ref={drop}
         className="card"
         style={{
           transform: scale,
@@ -88,121 +121,135 @@ const Card = ({ id, suit, rank, visible, disabled, highlighted, onClick }) => {
   }
 
   return (
-    <div onClick={handleClick}  draggable="true">
+    <div ref={drop}>
       <div
-        className="card"
-        style={{ color: suite.color, transform: scale, ...highlight }}
+        onClick={handleClick}
+        ref={drag}
+        style={{         
+          cursor: "move"
+        }}
       >
-        <div className="front">
-          <div className="corner top">
-            <span className="number">{rankLabel}</span>
-            <span className="suite">{suite.symbol}</span>
+        <div
+          className="card"
+          style={{  transform: scale, ...highlight,  color: isOver
+            ? "mauve"
+            : isDragging
+            ? "blue"
+            : suite.color }}
+        >
+          <div className="front">
+            <div className="corner top">
+              <span className="number">{rankLabel}</span>
+              <span className="suite">{suite.symbol}</span>
+            </div>
+
+            {rank == 2 && (
+              <>
+                <span className="suit top_center">{suite.symbol}</span>
+                <span className="suit bottom_center">{suite.symbol}</span>
+              </>
+            )}
+
+            {rank == 3 && (
+              <>
+                <span className="suit top_center">{suite.symbol}</span>
+                <span className="suit middle_center">{suite.symbol}</span>
+                <span className="suit bottom_center">{suite.symbol}</span>
+              </>
+            )}
+            {rank == 4 && (
+              <>
+                <span className="suit top_left">{suite.symbol}</span>
+                <span className="suit top_right">{suite.symbol}</span>
+                <span className="suit bottom_left">{suite.symbol}</span>
+                <span className="suit bottom_right">{suite.symbol}</span>
+              </>
+            )}
+            {rank == 5 && (
+              <>
+                <span className="suit top_left">{suite.symbol}</span>
+                <span className="suit top_right">{suite.symbol}</span>
+                <span className="suit middle_center">{suite.symbol}</span>
+                <span className="suit bottom_left">{suite.symbol}</span>
+                <span className="suit bottom_right">{suite.symbol}</span>
+              </>
+            )}
+
+            {rank == 6 && (
+              <>
+                <span className="suit top_left">{suite.symbol}</span>
+                <span className="suit top_right">{suite.symbol}</span>
+                <span className="suit middle_left">{suite.symbol}</span>
+                <span className="suit middle_right">{suite.symbol}</span>
+                <span className="suit bottom_left">{suite.symbol}</span>
+                <span className="suit bottom_right">{suite.symbol}</span>
+              </>
+            )}
+
+            {rank == 7 && (
+              <>
+                <span className="suit top_left">{suite.symbol}</span>
+                <span className="suit top_right">{suite.symbol}</span>
+                <span className="suit middle_left">{suite.symbol}</span>
+                <span className="suit middle_top">{suite.symbol}</span>
+                <span className="suit middle_right">{suite.symbol}</span>
+                <span className="suit bottom_left">{suite.symbol}</span>
+                <span className="suit bottom_right">{suite.symbol}</span>
+              </>
+            )}
+            {rank == 8 && (
+              <>
+                <span className="suit top_left">{suite.symbol}</span>
+                <span className="suit top_right">{suite.symbol}</span>
+                <span className="suit middle_left">{suite.symbol}</span>
+                <span className="suit middle_top">{suite.symbol}</span>
+                <span className="suit middle_right">{suite.symbol}</span>
+                <span className="suit middle_bottom">{suite.symbol}</span>
+                <span className="suit bottom_left">{suite.symbol}</span>
+                <span className="suit bottom_right">{suite.symbol}</span>
+              </>
+            )}
+
+            {rank == 9 && (
+              <>
+                <span className="suit top_left">{suite.symbol}</span>
+                <span className="suit top_right">{suite.symbol}</span>
+
+                <span className="suit middle_top_left">{suite.symbol}</span>
+                <span className="suit middle_center">{suite.symbol}</span>
+                <span className="suit middle_top_right">{suite.symbol}</span>
+                <span className="suit bottom_left">{suite.symbol}</span>
+                <span className="suit bottom_right">{suite.symbol}</span>
+                <span className="suit middle_bottom_left">{suite.symbol}</span>
+                <span className="suit middle_bottom_right">{suite.symbol}</span>
+              </>
+            )}
+            {rank == 10 && (
+              <>
+                <span className="suit top_left">{suite.symbol}</span>
+                <span className="suit top_right">{suite.symbol}</span>
+
+                <span className="suit middle_top_left">{suite.symbol}</span>
+                <span className="suit middle_top_center">{suite.symbol}</span>
+                <span className="suit middle_top_right">{suite.symbol}</span>
+                <span className="suit bottom_left">{suite.symbol}</span>
+                <span className="suit bottom_right">{suite.symbol}</span>
+                <span className="suit middle_bottom_center">
+                  {suite.symbol}
+                </span>
+                <span className="suit middle_bottom_left">{suite.symbol}</span>
+                <span className="suit middle_bottom_right">{suite.symbol}</span>
+              </>
+            )}
+            {rank > 10 && <span className="suit middle_center">&#9827;</span>}
+            <div className="corner bottom">
+              <span className="number">{rankLabel}</span>
+              <span>{suite.symbol}</span>
+            </div>
           </div>
 
-          {rank == 2 && (
-            <>
-              <span className="suit top_center">{suite.symbol}</span>
-              <span className="suit bottom_center">{suite.symbol}</span>
-            </>
-          )}
-
-          {rank == 3 && (
-            <>
-              <span className="suit top_center">{suite.symbol}</span>
-              <span className="suit middle_center">{suite.symbol}</span>
-              <span className="suit bottom_center">{suite.symbol}</span>
-            </>
-          )}
-          {rank == 4 && (
-            <>
-              <span className="suit top_left">{suite.symbol}</span>
-              <span className="suit top_right">{suite.symbol}</span>
-              <span className="suit bottom_left">{suite.symbol}</span>
-              <span className="suit bottom_right">{suite.symbol}</span>
-            </>
-          )}
-          {rank == 5 && (
-            <>
-              <span className="suit top_left">{suite.symbol}</span>
-              <span className="suit top_right">{suite.symbol}</span>
-              <span className="suit middle_center">{suite.symbol}</span>
-              <span className="suit bottom_left">{suite.symbol}</span>
-              <span className="suit bottom_right">{suite.symbol}</span>
-            </>
-          )}
-
-          {rank == 6 && (
-            <>
-              <span className="suit top_left">{suite.symbol}</span>
-              <span className="suit top_right">{suite.symbol}</span>
-              <span className="suit middle_left">{suite.symbol}</span>
-              <span className="suit middle_right">{suite.symbol}</span>
-              <span className="suit bottom_left">{suite.symbol}</span>
-              <span className="suit bottom_right">{suite.symbol}</span>
-            </>
-          )}
-
-          {rank == 7 && (
-            <>
-              <span className="suit top_left">{suite.symbol}</span>
-              <span className="suit top_right">{suite.symbol}</span>
-              <span className="suit middle_left">{suite.symbol}</span>
-              <span className="suit middle_top">{suite.symbol}</span>
-              <span className="suit middle_right">{suite.symbol}</span>
-              <span className="suit bottom_left">{suite.symbol}</span>
-              <span className="suit bottom_right">{suite.symbol}</span>
-            </>
-          )}
-          {rank == 8 && (
-            <>
-              <span className="suit top_left">{suite.symbol}</span>
-              <span className="suit top_right">{suite.symbol}</span>
-              <span className="suit middle_left">{suite.symbol}</span>
-              <span className="suit middle_top">{suite.symbol}</span>
-              <span className="suit middle_right">{suite.symbol}</span>
-              <span className="suit middle_bottom">{suite.symbol}</span>
-              <span className="suit bottom_left">{suite.symbol}</span>
-              <span className="suit bottom_right">{suite.symbol}</span>
-            </>
-          )}
-
-          {rank == 9 && (
-            <>
-              <span className="suit top_left">{suite.symbol}</span>
-              <span className="suit top_right">{suite.symbol}</span>
-
-              <span className="suit middle_top_left">{suite.symbol}</span>
-              <span className="suit middle_center">{suite.symbol}</span>
-              <span className="suit middle_top_right">{suite.symbol}</span>
-              <span className="suit bottom_left">{suite.symbol}</span>
-              <span className="suit bottom_right">{suite.symbol}</span>
-              <span className="suit middle_bottom_left">{suite.symbol}</span>
-              <span className="suit middle_bottom_right">{suite.symbol}</span>
-            </>
-          )}
-          {rank == 10 && (
-            <>
-              <span className="suit top_left">{suite.symbol}</span>
-              <span className="suit top_right">{suite.symbol}</span>
-
-              <span className="suit middle_top_left">{suite.symbol}</span>
-              <span className="suit middle_top_center">{suite.symbol}</span>
-              <span className="suit middle_top_right">{suite.symbol}</span>
-              <span className="suit bottom_left">{suite.symbol}</span>
-              <span className="suit bottom_right">{suite.symbol}</span>
-              <span className="suit middle_bottom_center">{suite.symbol}</span>
-              <span className="suit middle_bottom_left">{suite.symbol}</span>
-              <span className="suit middle_bottom_right">{suite.symbol}</span>
-            </>
-          )}
-          {rank > 10 && <span className="suit middle_center">&#9827;</span>}
-          <div className="corner bottom">
-            <span className="number">{rankLabel}</span>
-            <span>{suite.symbol}</span>
-          </div>
+          <div className="back"></div>
         </div>
-
-        <div className="back"></div>
       </div>
     </div>
   );
