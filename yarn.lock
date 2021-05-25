@@ -591,6 +591,11 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
+fireworks-js@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/fireworks-js/-/fireworks-js-1.0.5.tgz#0f037af4239ba29398845bd0fc48a5b06c8d9215"
+  integrity sha512-ePnCovaxuu8OWiLZAZAoH2v7Q9jJS+/ljR1ZeUZLn5RCxAhgdGUxKrcQRgBi3UIIILYfofMDU8HKz5JqwDR+hQ==
+
 foreground-child@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/foreground-child/-/foreground-child-2.0.0.tgz#71b32800c9f15aa8f2f83f4a6bd9bff35d861a53"
