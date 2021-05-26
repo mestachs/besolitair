@@ -81,6 +81,7 @@ const Card = ({
         className="card"
         style={{
           transform: scale,
+          border: "2px dashed"
         }}
       >
         <div className="corner top">
@@ -88,7 +89,7 @@ const Card = ({
             className="suite"
             style={{ fontSize: "500%", filter: "grayscale(100%)" }}
           >
-            {"\u26d4"}
+            {"..."}
           </span>
         </div>
         <div className="corner bottom">
@@ -96,7 +97,7 @@ const Card = ({
             className="suite"
             style={{ fontSize: "500%", filter: "grayscale(100%)" }}
           >
-            {"\u26d4"}
+            {"..."}
           </span>
         </div>
       </div>
