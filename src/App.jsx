@@ -6,7 +6,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import solvable from "./games/solvable.json";
 import { Fireworks } from "fireworks-js";
-
+import Status from "./components/Status";
 import {
   distributeRemainingCards,
   setupDefaultGame,
@@ -18,59 +18,16 @@ import {
   numberOfHidenCards,
   biggestDeckCards,
   numberOfCards,
+  randomItem,
 } from "./games/spider";
 
-function sec2time(timeInMilliSeconds) {
-  var pad = function (num, size) {
-    return ("000" + num).slice(size * -1);
-  };
-  const time = timeInMilliSeconds / 1000;
-  const hours = Math.floor(time / 60 / 60);
-  const minutes = Math.floor(time / 60) % 60;
-  const seconds = Math.floor(time - minutes * 60);
-
-  if (hours > 0) {
-    return "started " + hours + " hours and " + minutes + " minutes ago";
-  }
-
-  if (minutes == 1) {
-    return "started " + minutes + " minute and " + seconds + " seconds ago";
-  }
-
-  if (minutes > 0) {
-    return "started " + minutes + " minutes and " + seconds + " seconds ago";
-  }
-
-  if (seconds > 0) {
-    return "started " + seconds + " seconds ago";
-  }
-
-  return pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2);
-}
-
-const copyToClipboard = (str) => {
-  const el = document.createElement("textarea");
-  el.value = str;
-  el.setAttribute("readonly", "");
-  el.style.position = "absolute";
-  el.style.left = "-9999px";
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand("copy");
-  document.body.removeChild(el);
-};
 const startedAt = new Date();
 
 function App() {
-  const [date, setDate] = React.useState(new Date());
   const [fireworks, setFireworks] = React.useState(undefined);
 
   const [game, setRawGame] = useState(setupDefaultGame(1));
   const [gameHistory, setGameHistory] = useState([]);
-
-  function tick() {
-    setDate(new Date());
-  }
 
   React.useEffect(() => {
     const container = document.querySelector("#fireworks");
@@ -114,12 +71,6 @@ function App() {
     }
   }, [game]);
 
-  React.useEffect(() => {
-    var timerID = setInterval(() => tick(), 1000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
-  });
   const [highlightedCards, setHightlightedCards] = useState(new Set());
   const setGame = (newgame) => {
     gameHistory.push(game);
@@ -150,7 +101,6 @@ function App() {
   const resetHighlighted = () => setHightlightedCards(new Set());
 
   const handleKeyDown = (event) => {
-    console.log("event key down");
     if (event.key == "h") {
       showHint();
     }
@@ -198,7 +148,6 @@ function App() {
         return sameMovedCard && move.targetDeck.id == deck.id;
       }
     });
-    debugger;
     const newGame = moveCard(game, selectedMove);
     setGame(newGame);
   };
@@ -224,34 +173,17 @@ function App() {
           onKeyUp={resetHighlighted}
           tabIndex={0}
         >
-          <button onClick={handleUndo} disabled={gameHistory.length == 0}>
-            Undo
-          </button>
-
-          <span style={{ fontSize: "18px", marginLeft: "20px" }}>
-            {gameHistory.length == 0 ? (
-              <span>
-                <br />
-                Click on a card to move it to one of the allowed deck. <br />
-                Stuck ? press h to find possible movements.
-                <br /> Lazy & lucky ? press p to randomly play.
-              </span>
-            ) : (
-              <span>
-                Already {gameHistory.length} moves, {game.remaingCards.length}{" "}
-                cards left, {date.toLocaleTimeString()},{" "}
-                {sec2time(new Date() - startedAt)}
-              </span>
-            )}
-          </span>
+          <Status
+            game={game}
+            gameHistory={gameHistory}
+            startedAt={startedAt}
+            handleUndo={handleUndo}
+          />
 
           {game.remaingCards.length > 0 && (
             <span style={{ display: "block" }}>
-              <Card
-                visible={false}
-                onClick={handleDistributeRemainingCards}
-              ></Card>
-              <br></br>
+              <Card visible={false} onClick={handleDistributeRemainingCards} />
+              <br />
             </span>
           )}
           {game.remaingCards.length == 0 && <Card disabled={true}></Card>}
@@ -265,15 +197,13 @@ function App() {
                   {deck.cards
                     .map((card) => {
                       return (
-                        <>
-                          <Card
-                            key={card.id}
-                            {...card}
-                            onClick={onClickCard}
-                            onDropped={onDropped}
-                            highlighted={highlightedCards.has(card.id)}
-                          ></Card>
-                        </>
+                        <Card
+                          key={card.id}
+                          {...card}
+                          onClick={onClickCard}
+                          onDropped={onDropped}
+                          highlighted={highlightedCards.has(card.id)}
+                        />
                       );
                     })
                     .concat(
