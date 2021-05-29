@@ -30,12 +30,13 @@ You can have a look at the progress [here](https://mestachs.github.io/besolitair
        - [ ] play radio/music
   - [x] handle undo (basic)
   - [x] handle hint (highlight possible moves)
-  - [ ] implement auto play with some heuristics
+  - [x] implement auto play with some heuristics
   - [ ] setup github actions
   - [ ] add features to ease test 
       - [x] export game state, 
       - [x] load nearly solved game
       - [ ] enabled these feature only in local
+  - [x] playable with keyboard (use same logic as click)
 
 # Developement setup
 
