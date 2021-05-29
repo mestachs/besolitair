@@ -23,10 +23,11 @@ const Status = ({ game, gameHistory, startedAt, handleUndo }) => {
       <span style={{ fontSize: "18px", marginLeft: "20px" }}>
         {gameHistory.length == 0 ? (
           <span>
-            <br />
             Click on a card to move it to one of the allowed deck. <br />
             Stuck ? Press h to find possible movements.
             <br /> Lazy & lucky ? Press p to randomly play.
+            <br /> Undo with u, Deal the remaining card with d, 1 to 9 or 0 for playing the first move in the deck.
+            
           </span>
         ) : (
           <span>

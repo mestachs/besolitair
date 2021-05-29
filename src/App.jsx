@@ -7,6 +7,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import solvable from "./games/solvable.json";
 import { Fireworks } from "fireworks-js";
 import Status from "./components/Status";
+import { useSpring, animated } from "react-spring";
 import {
   distributeRemainingCards,
   setupDefaultGame,
@@ -24,6 +25,12 @@ import {
 const startedAt = new Date();
 
 function App() {
+  const props = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    delay: 800,
+  });
+
   const [fireworks, setFireworks] = React.useState(undefined);
 
   const [game, setRawGame] = useState(setupDefaultGame(1));
@@ -98,36 +105,56 @@ function App() {
     const moves = allPossibleMoves(game);
     setHightlightedCards(new Set(moves.map((m) => m.card.id)));
   };
+
+  const handleAutoPlay = () => {
+    let moves = allPossibleMoves(game);
+    if (moves.length > 0) {
+      //TODO get smarter take a better heuristic
+      // longest suite ? less visible card
+      for (let move of moves) {
+        const newGame = checkSuiteCombined(moveCard(game, move));
+        move.numberOfHidenCards =
+          biggestDeckCards(newGame) +
+          (104 - numberOfHidenCards(newGame)) +
+          (104 - numberOfCards(newGame));
+      }
+      moves = moves.sort((a, b) =>
+        a.numberOfHidenCards < b.numberOfHidenCards ? -1 : 1
+      );
+
+      let newGame;
+      if (Math.random() > 0.5) {
+        newGame = moveCard(game, randomItem(moves));
+      } else {
+        newGame = moveCard(game, moves[moves.length - 1]);
+      }
+
+      setGame(newGame);
+    }
+  };
   const resetHighlighted = () => setHightlightedCards(new Set());
 
   const handleKeyDown = (event) => {
     if (event.key == "h") {
       showHint();
     }
-
+    if (event.key == "u") {
+      handleUndo();
+    }
+    if (event.key == "d") {
+      handleDistributeRemainingCards();
+    }
     if (event.key == "p") {
+      handleAutoPlay();
+    }
+
+    if (parseInt(event.key) || parseInt(event.key) === 0) {
       let moves = allPossibleMoves(game);
-      if (moves.length > 0) {
-        //TODO get smarter take a better heuristic
-        // longest suite ? less visible card
-        for (let move of moves) {
-          const newGame = checkSuiteCombined(moveCard(game, move));
-          move.numberOfHidenCards =
-            biggestDeckCards(newGame) +
-            (104 - numberOfHidenCards(newGame)) +
-            (104 - numberOfCards(newGame));
-        }
-        moves = moves.sort((a, b) =>
-          a.numberOfHidenCards < b.numberOfHidenCards ? -1 : 1
-        );
-
-        let newGame;
-        if (Math.random() > 0.5) {
-          newGame = moveCard(game, randomItem(moves));
-        } else {
-          newGame = moveCard(game, moves[moves.length - 1]);
-        }
-
+      const deckIndex = event.key == "0" ? 9 : (parseInt(event.key) - 1)
+      const selectedMove = moves.find((move) => move.sourceDeck.id == deckIndex);
+      debugger;
+      if (selectedMove) {
+        const newGame = moveCard(game, selectedMove);
         setGame(newGame);
       }
     }
@@ -153,95 +180,100 @@ function App() {
   };
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div
-        id="fireworks"
-        style={{
-          position: "absolute",
-          background: game.status == "won" ? "black" : "#e7e7e7",
-          top: 0,
-          left: 0,
-          height: "100vh",
-          width: "100%",
-          zIndex: game.status == "won" ? 100 : -100,
-        }}
-      />
-      {game.status !== "won" && (
+    <animated.div style={props}>
+      <DndProvider backend={HTML5Backend}>
         <div
-          id="table"
-          onKeyDown={handleKeyDown}
-          onKeyUp={resetHighlighted}
-          tabIndex={0}
-        >
-          <Status
-            game={game}
-            gameHistory={gameHistory}
-            startedAt={startedAt}
-            handleUndo={handleUndo}
-          />
-
-          {game.remaingCards.length > 0 && (
-            <span style={{ display: "block" }}>
-              <Card visible={false} onClick={handleDistributeRemainingCards} />
-              <br />
-            </span>
-          )}
-          {game.remaingCards.length == 0 && <Card disabled={true}></Card>}
+          id="fireworks"
+          style={{
+            position: "absolute",
+            background: game.status == "won" ? "black" : "#e7e7e7",
+            top: 0,
+            left: 0,
+            height: "100vh",
+            width: "100%",
+            zIndex: game.status == "won" ? 100 : -100,
+          }}
+        />
+        {game.status !== "won" && (
           <div
-            id="cards"
-            style={{ display: "flex", justifyContent: "space-around" }}
+            id="table"
+            onKeyDown={handleKeyDown}
+            onKeyUp={resetHighlighted}
+            tabIndex={0}
           >
-            {game.decks.map((deck, index) => {
-              return (
-                <Deck key={deck.id} deck={index}>
-                  {deck.cards
-                    .map((card) => {
-                      return (
-                        <Card
-                          key={card.id}
-                          {...card}
-                          onClick={onClickCard}
-                          onDropped={onDropped}
-                          highlighted={highlightedCards.has(card.id)}
-                        />
-                      );
-                    })
-                    .concat(
-                      deck.cards.length == 0
-                        ? [
-                            <Card
-                              disabled={true}
-                              onDropped={(dropped) =>
-                                onDropped(dropped, undefined, deck)
-                              }
-                            />,
-                          ]
-                        : []
-                    )}
-                </Deck>
-              );
-            })}
+            <Status
+              game={game}
+              gameHistory={gameHistory}
+              startedAt={startedAt}
+              handleUndo={handleUndo}
+            />
+
+            {game.remaingCards.length > 0 && (
+              <span style={{ display: "block" }}>
+                <Card
+                  visible={false}
+                  onClick={handleDistributeRemainingCards}
+                />
+                <br />
+              </span>
+            )}
+            {game.remaingCards.length == 0 && <Card disabled={true}></Card>}
+            <div
+              id="cards"
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
+              {game.decks.map((deck, index) => {
+                return (
+                  <Deck key={deck.id} deck={index}>
+                    {deck.cards
+                      .map((card) => {
+                        return (
+                          <Card
+                            key={card.id}
+                            {...card}
+                            onClick={onClickCard}
+                            onDropped={onDropped}
+                            highlighted={highlightedCards.has(card.id)}
+                          />
+                        );
+                      })
+                      .concat(
+                        deck.cards.length == 0
+                          ? [
+                              <Card
+                                disabled={true}
+                                onDropped={(dropped) =>
+                                  onDropped(dropped, undefined, deck)
+                                }
+                              />,
+                            ]
+                          : []
+                      )}
+                  </Deck>
+                );
+              })}
+            </div>
+
+            <button
+              onClick={() => {
+                copyToClipboard(JSON.stringify(game));
+              }}
+            >
+              Copy game state
+            </button>
+
+            <button
+              onClick={() => {
+                setGame(solvable);
+                setGameHistory([]);
+              }}
+            >
+              Load solvable
+            </button>
           </div>
-
-          <button
-            onClick={() => {
-              copyToClipboard(JSON.stringify(game));
-            }}
-          >
-            Copy game state
-          </button>
-
-          <button
-            onClick={() => {
-              setGame(solvable);
-              setGameHistory([]);
-            }}
-          >
-            Load solvable
-          </button>
-        </div>
-      )}
-    </DndProvider>
+        )}
+      </DndProvider>
+    </animated.div>
   );
 }
 
