@@ -191,13 +191,13 @@ export const checkSuiteCombined = (game) => {
 };
 
 export const checkWon = (game) => {
-  const allDeckEmpty = game.decks.every((deck) => deck.cards.length == 0)
-  const noRemainingCards = game.remaingCards.length == 0
+  const allDeckEmpty = game.decks.every((deck) => deck.cards.length == 0);
+  const noRemainingCards = game.remaingCards.length == 0;
   if (allDeckEmpty && noRemainingCards) {
-    game.status= "won"
+    game.status = "won";
   }
-  return game
-}
+  return game;
+};
 
 export const distributeRemainingCards = (game) => {
   const newGame = cloneGame(game);
@@ -235,3 +235,29 @@ export const biggestDeckCards = (game) =>
   Math.max(
     ...game.decks.map((deck) => deck.cards.filter((c) => c.visible).length)
   );
+
+export const findBestMove = (moves, game) => {
+  if (moves.length == 0) {
+    return;
+  }
+  //TODO get smarter take a better heuristic, longest suite or test more turns and see if better outcome
+  for (let move of moves) {
+    const newGame = checkSuiteCombined(moveCard(game, move));
+    move.numberOfHidenCards =
+      biggestDeckCards(newGame) +
+      (104 - numberOfHidenCards(newGame)) +
+      (104 - numberOfCards(newGame));
+  }
+  moves = moves.sort((a, b) =>
+    a.numberOfHidenCards < b.numberOfHidenCards ? -1 : 1
+  );
+
+  let move;
+  if (Math.random() > 0.8) {
+    move = randomItem(moves);
+  } else {
+    move = moves[moves.length - 1];
+  }
+
+  return move;
+};

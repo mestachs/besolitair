@@ -16,10 +16,7 @@ import {
   checkSuiteCombined,
   checkWon,
   allPossibleMoves,
-  numberOfHidenCards,
-  biggestDeckCards,
-  numberOfCards,
-  randomItem,
+  findBestMove,
 } from "./games/spider";
 
 const startedAt = new Date();
@@ -109,26 +106,8 @@ function App() {
   const handleAutoPlay = () => {
     let moves = allPossibleMoves(game);
     if (moves.length > 0) {
-      //TODO get smarter take a better heuristic
-      // longest suite ? less visible card
-      for (let move of moves) {
-        const newGame = checkSuiteCombined(moveCard(game, move));
-        move.numberOfHidenCards =
-          biggestDeckCards(newGame) +
-          (104 - numberOfHidenCards(newGame)) +
-          (104 - numberOfCards(newGame));
-      }
-      moves = moves.sort((a, b) =>
-        a.numberOfHidenCards < b.numberOfHidenCards ? -1 : 1
-      );
-
-      let newGame;
-      if (Math.random() > 0.5) {
-        newGame = moveCard(game, randomItem(moves));
-      } else {
-        newGame = moveCard(game, moves[moves.length - 1]);
-      }
-
+      const move = findBestMove(moves, game);
+      const newGame = moveCard(game, move);
       setGame(newGame);
     }
   };
@@ -150,9 +129,12 @@ function App() {
 
     if (parseInt(event.key) || parseInt(event.key) === 0) {
       let moves = allPossibleMoves(game);
-      const deckIndex = event.key == "0" ? 9 : (parseInt(event.key) - 1)
-      const selectedMove = moves.find((move) => move.sourceDeck.id == deckIndex);
+      const deckIndex = event.key == "0" ? 9 : parseInt(event.key) - 1;
+      const selectedMoves = moves.filter(
+        (move) => move.sourceDeck.id == deckIndex
+      );
       debugger;
+      const selectedMove = findBestMove(selectedMoves, game)
       if (selectedMove) {
         const newGame = moveCard(game, selectedMove);
         setGame(newGame);
