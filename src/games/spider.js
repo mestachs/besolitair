@@ -117,6 +117,12 @@ export const isASuite = (cards) => {
   return true;
 };
 
+export const isSameSuite = (cards) => {
+  const s = cards[0].suit
+  const samesuite = cards.every(c => c.suit == s)
+  return samesuite
+}
+
 export const possibleMoves = (card, game) => {
   const moves = [];
   if (card.visible) {
@@ -126,7 +132,8 @@ export const possibleMoves = (card, game) => {
       if (cardIndex >= 0) {
         const selectedCards = deck.cards.slice(cardIndex, deck.cards.length);
         const asuite = isASuite(selectedCards);
-        if (asuite) {
+        const sameSuite = isSameSuite(selectedCards)
+        if (asuite && sameSuite) {
           const playableDecks = game.decks.filter((deck) => {
             const candidateCard = lastCard(deck);
             if (candidateCard == undefined) {

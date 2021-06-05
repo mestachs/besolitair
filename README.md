@@ -20,6 +20,7 @@ You can have a look at the progress [here](https://mestachs.github.io/besolitair
   - [x] implements all the rules :
        - [x] check sequential same suite for big move
        - [x] distribute remaining cards only if all decks are filled
+       - [x] handle multiple suites, can only move block of same suite
   - [x] check you completed a suite
   - [x] check you won 
   - [ ] if won then [celebrate](https://github.com/crashmax-off/fireworks-js/)
