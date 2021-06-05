@@ -45,7 +45,12 @@ export const generateSpideCards = (numberOfSuites) => {
   throw new Error("Only 1 or 2 suites supported");
 };
 
-export const shuffle = (cards) => cards.sort((a, b) => 0.2 - Math.random());
+export const shuffle = (cards, level) => {
+  const tendency = level == "easy" ? 0.2 : 0.5;
+  cards.sort((a, b) => tendency - Math.random());
+  cards.sort((a, b) => tendency - Math.random());
+  return cards;
+};
 
 export const toGame = (cards) => {
   const decks = [];
@@ -79,8 +84,8 @@ export const toGame = (cards) => {
   };
 };
 
-export const setupDefaultGame = (numberOfSuites) =>
-  toGame(shuffle(shuffle(generateSpideCards(numberOfSuites))));
+export const setupDefaultGame = (numberOfSuites, level) =>
+  toGame(shuffle(generateSpideCards(numberOfSuites), level));
 
 export const cloneGame = (game) => JSON.parse(JSON.stringify(game));
 
@@ -147,6 +152,9 @@ export const allPossibleMoves = (game) => {
 };
 
 export const moveCard = (game, move) => {
+  if (move == undefined) {
+    return game;
+  }
   const newgame = cloneGame(game);
   const sourceDeck = newgame.decks[move.sourceDeck.id];
   const movedCards = sourceDeck.cards.slice(move.sourceCardIndex);
