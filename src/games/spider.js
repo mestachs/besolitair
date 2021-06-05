@@ -42,13 +42,25 @@ export const generateSpideCards = (numberOfSuites) => {
       .concat(generateCardsForSuite("heart"));
   }
 
-  throw new Error("Only 1 or 2 suites supported");
+  if (numberOfSuites == 4) {
+    return generateCardsForSuite("spades")
+      .concat(generateCardsForSuite("spades"))
+      .concat(generateCardsForSuite("diamond"))
+      .concat(generateCardsForSuite("diamond"))
+      .concat(generateCardsForSuite("heart"))
+      .concat(generateCardsForSuite("heart"))
+      .concat(generateCardsForSuite("club"))
+      .concat(generateCardsForSuite("club"));
+  }
+
+  throw new Error("Only 1, 2 or 4 suites supported not "+numberOfSuites);
 };
 
-export const shuffle = (cards, level) => {
+export const shuffle = (cards, level, numberOfSuites) => {
   const tendency = level == "easy" ? 0.2 : 0.5;
-  cards.sort((a, b) => tendency - Math.random());
-  cards.sort((a, b) => tendency - Math.random());
+  for (let step = 0; step < numberOfSuites; step++) {
+    cards.sort((a, b) => tendency - Math.random());
+  }
   return cards;
 };
 
@@ -85,7 +97,7 @@ export const toGame = (cards) => {
 };
 
 export const setupDefaultGame = (numberOfSuites, level) =>
-  toGame(shuffle(generateSpideCards(numberOfSuites), level));
+  toGame(shuffle(generateSpideCards(numberOfSuites), level, numberOfSuites));
 
 export const cloneGame = (game) => JSON.parse(JSON.stringify(game));
 
@@ -261,7 +273,7 @@ export const findBestMove = (moves, game) => {
   );
 
   let move;
-  if (Math.random() > 0.8) {
+  if (Math.random() > 0.1) {
     move = randomItem(moves);
   } else {
     move = moves[moves.length - 1];

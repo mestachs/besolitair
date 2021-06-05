@@ -1,8 +1,16 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { sec2elapsed } from "../lib/utils";
 
-const Status = ({ game, gameHistory, startedAt, handleUndo, showHint, hideHint }) => {
+const Status = ({
+  game,
+  gameHistory,
+  startedAt,
+  handleUndo,
+  showHint,
+  hideHint,
+}) => {
   const [date, setDate] = React.useState(new Date());
   function tick() {
     setDate(new Date());
@@ -15,11 +23,11 @@ const Status = ({ game, gameHistory, startedAt, handleUndo, showHint, hideHint }
     };
   });
   return (
-    <div style={{ display: "flex", height: "50px" }}>
+    <div style={{ display: "flex", height: "50px", alignItems: "center"}}>
       <button onClick={handleUndo} disabled={gameHistory.length == 0}>
         Undo
       </button>
-      <button onMouseDown={ showHint } onMouseUp={ hideHint } >
+      <button onMouseDown={showHint} onMouseUp={hideHint}>
         Hint
       </button>
 
@@ -29,8 +37,8 @@ const Status = ({ game, gameHistory, startedAt, handleUndo, showHint, hideHint }
             Click on a card to move it to one of the allowed deck. <br />
             Stuck ? Press h to find possible movements.
             <br /> Lazy & lucky ? Press p to randomly play.
-            <br /> Undo with u, Deal the remaining card with d, 1 to 9 or 0 for playing the first move in the deck.
-            
+            <br /> Undo with u, Deal the remaining card with d, 1 to 9 or 0 for
+            playing the first move in the deck.
           </span>
         ) : (
           <span>
@@ -40,6 +48,9 @@ const Status = ({ game, gameHistory, startedAt, handleUndo, showHint, hideHint }
           </span>
         )}
       </span>
+      <Link to="/" style={{ marginLeft: "auto", marginRight: "50px"}}>
+        <button>New</button>
+      </Link>
     </div>
   );
 };

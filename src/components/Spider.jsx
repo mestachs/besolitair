@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Deck from "./components/Deck";
-import Card from "./components/Card";
-import solvable from "./games/solvable.json";
+import Deck from "./Deck";
+import Card from "./Card";
+import solvable from "../games/solvable.json";
 import { Fireworks } from "fireworks-js";
-import Status from "./components/Status";
+import Status from "./Status";
 
 import {
   distributeRemainingCards,
@@ -14,7 +14,7 @@ import {
   checkWon,
   allPossibleMoves,
   findBestMove,
-} from "./games/spider";
+} from "../games/spider";
 
 const startedAt = new Date();
 

@@ -4,9 +4,13 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSpring, animated } from "react-spring";
 import { Route, Switch } from "react-router";
-import { HashRouter as Router } from "react-router-dom";
+import { HashRouter as Router, Link } from "react-router-dom";
 
-import Spider from "./Spider";
+import Spider from "./components/Spider";
+import SpiderIcon from "./components/SpiderIcon";
+
+const levels = ["easy", "hard"];
+const suites = [1, 2, 4];
 
 function App() {
   const props = useSpring({
@@ -21,16 +25,51 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
-              <Spider></Spider>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <SpiderIcon></SpiderIcon>
+                <div style={{ display: "flex", flexWrap: "wrap" }}>
+                  {suites.map((suite) => {
+                    return (
+                      <div>
+                        {levels.map((level) => {
+                          return (
+                            <div>
+                              <Link to={"/spider/" + suite + "/" + level}>
+                                <button style={{ width: "400px" }}>
+                                  Spider {suite} Suites {level}
+                                </button>
+                              </Link>
+                              <br></br>
+                            </div>
+                          );
+                        })}
+                        <br></br>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </Route>
             <Route
               path="/spider/:suites/:level"
               render={({ match }) => {
-                const numberOfSuites = parseInt(match.params.suites)
-                const level = match.params.level
-                return <Spider numberOfSuites={numberOfSuites} level={level}></Spider>;
+                const numberOfSuites = parseInt(match.params.suites);
+                const level = match.params.level;
+                return (
+                  <Spider
+                    numberOfSuites={numberOfSuites}
+                    level={level}
+                  ></Spider>
+                );
               }}
-            ></Route>
+            />
           </Switch>
         </Router>
       </DndProvider>
