@@ -188,6 +188,8 @@ function App() {
               gameHistory={gameHistory}
               startedAt={startedAt}
               handleUndo={handleUndo}
+              showHint={showHint}
+              hideHint={resetHighlighted}
             />
 
             {game.remaingCards.length > 0 && (
@@ -206,7 +208,7 @@ function App() {
             >
               {game.decks.map((deck, index) => {
                 return (
-                  <Deck key={deck.id} deck={index}>
+                  <Deck key={deck.id} deck={deck} onDropped={onDropped} >
                     {deck.cards
                       .map((card) => {
                         return (

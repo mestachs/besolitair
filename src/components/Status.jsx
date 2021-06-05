@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { sec2elapsed } from "../lib/utils";
 
-const Status = ({ game, gameHistory, startedAt, handleUndo }) => {
+const Status = ({ game, gameHistory, startedAt, handleUndo, showHint, hideHint }) => {
   const [date, setDate] = React.useState(new Date());
   function tick() {
     setDate(new Date());
@@ -18,6 +18,9 @@ const Status = ({ game, gameHistory, startedAt, handleUndo }) => {
     <div style={{ display: "flex", height: "50px" }}>
       <button onClick={handleUndo} disabled={gameHistory.length == 0}>
         Undo
+      </button>
+      <button onMouseDown={ showHint } onMouseUp={ hideHint } >
+        Hint
       </button>
 
       <span style={{ fontSize: "18px", marginLeft: "20px" }}>
