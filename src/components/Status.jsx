@@ -30,7 +30,6 @@ const Status = ({
       <button onMouseDown={showHint} onMouseUp={hideHint}>
         Hint
       </button>
-
       <span style={{ fontSize: "18px", marginLeft: "20px" }}>
         {gameHistory.length == 0 ? (
           <span>

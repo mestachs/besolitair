@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import Deck from "./Deck";
 import Card from "./Card";
 import solvable from "../games/solvable.json";
-import { Fireworks } from "fireworks-js";
 import Status from "./Status";
-
+import { Fireworks, useFireworks } from "fireworks-js/dist/react";
 import {
   distributeRemainingCards,
   setupDefaultGame,
@@ -18,16 +17,13 @@ import {
 
 const startedAt = new Date();
 
-function Spider({numberOfSuites, level}) {
-  const [fireworks, setFireworks] = React.useState(undefined);
-
+function Spider({ numberOfSuites, level }) {
   const [game, setRawGame] = useState(setupDefaultGame(numberOfSuites, level));
   const [gameHistory, setGameHistory] = useState([]);
 
-  React.useEffect(() => {
-    const container = document.querySelector("#fireworks");
-    const newFireworks = new Fireworks({
-      target: container,
+  const { enabled, options, setEnabled, setOptions } = useFireworks({
+    initialStart: false,
+    initialOptions: {
       hue: 120,
       startDelay: 1,
       minDelay: 20,
@@ -55,14 +51,12 @@ function Spider({numberOfSuites, level}) {
         min: 4,
         max: 18,
       },
-    });
-
-    setFireworks(newFireworks);
-  }, []);
+    },
+  });
 
   React.useEffect(() => {
     if (game.status == "won") {
-      fireworks.start();
+      setEnabled(true);
     }
   }, [game]);
 
@@ -154,18 +148,22 @@ function Spider({numberOfSuites, level}) {
 
   return (
     <div>
-      <div
-        id="fireworks"
-        style={{
-          position: "absolute",
-          background: game.status == "won" ? "black" : "#e7e7e7",
-          top: 0,
-          left: 0,
-          height: "100vh",
-          width: "100%",
-          zIndex: game.status == "won" ? 100 : -100,
-        }}
-      />
+      <div id="fireworks">
+        <Fireworks
+          style={{
+            position: "absolute",
+            background: game.status == "won" ? "black" : "#e7e7e7",
+            top: 0,
+            left: 0,
+            height: "100vh",
+            width: "100%",
+            zIndex: game.status == "won" ? 100 : -100,
+          }}
+          enabled={enabled}
+          options={options}
+        />
+      </div>
+
       {game.status !== "won" && (
         <div
           id="table"
@@ -200,8 +198,8 @@ function Spider({numberOfSuites, level}) {
                     .map((card) => {
                       return (
                         <Card
-                          key={card.id}
                           {...card}
+                          key={card.id}
                           onClick={onClickCard}
                           onDropped={onDropped}
                           highlighted={highlightedCards.has(card.id)}

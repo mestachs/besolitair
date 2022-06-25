@@ -24,7 +24,7 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <Router>
           <Switch>
-            <Route exact path="/">
+            <Route key="home" exact path="/">
               <div
                 style={{
                   display: "flex",
@@ -37,10 +37,10 @@ function App() {
                 <div style={{ display: "flex", flexWrap: "wrap" }}>
                   {suites.map((suite) => {
                     return (
-                      <div>
+                      <div key={"choice-"+suite}>
                         {levels.map((level) => {
                           return (
-                            <div>
+                            <div key={"choice-"+level}>
                               <Link to={"/spider/" + suite + "/" + level}>
                                 <button style={{ width: "400px" }}>
                                   Spider {suite} Suites {level}
