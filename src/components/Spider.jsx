@@ -21,8 +21,8 @@ function Spider({ numberOfSuites, level }) {
   const [game, setRawGame] = useState(setupDefaultGame(numberOfSuites, level));
   const [gameHistory, setGameHistory] = useState([]);
 
-  const { enabled, options, setEnabled, setOptions } = useFireworks({
-    initialStart: false,
+  const { enabled, options, setEnabled, setOptions } = useFireworks({   
+    initialStart: false, 
     initialOptions: {
       hue: 120,
       startDelay: 1,
@@ -44,9 +44,9 @@ function Spider({ numberOfSuites, level }) {
       sound: {
         enable: true,
         list: [
-          "https://crashmax-dev.github.io/fireworks-js/explosion0.mp3",
-          "https://crashmax-dev.github.io/fireworks-js/explosion1.mp3",
-          "https://crashmax-dev.github.io/fireworks-js/explosion2.mp3",
+          'https://fireworks.js.org/sounds/explosion0.mp3',
+          'https://fireworks.js.org/sounds/explosion1.mp3',
+          'https://fireworks.js.org/sounds/explosion2.mp3'
         ],
         min: 4,
         max: 18,
